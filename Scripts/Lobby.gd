@@ -6,24 +6,25 @@ const player_instance = preload("res://Instantiable/PlayerInstance.tscn")
 const client_script = preload("res://Scripts/CharacterClient.gd")
 const game_scene = preload("res://Scenes/Game.tscn")
 
-func start_connection():
-	character_name = $"Panel/Character Name".text
-	
-	peer = NetworkedMultiplayerENet.new()
-	peer.set_compression_mode(NetworkedMultiplayerENet.COMPRESS_RANGE_CODER)
-	peer.create_client($Panel/Address.text, int($Panel/Port.text))
-	get_tree().network_peer = null
-	get_tree().network_peer = peer
-	
+func _ready():
 	get_tree().connect("network_peer_connected", self, "_on_player_connected")
 	get_tree().connect("network_peer_disconnected", self, "_on_player_disconnected")
 	get_tree().connect("connected_to_server", self,"_connection_ok")
 	get_tree().connect("connection_failed", self, "_connection_fail")
 	get_tree().connect("server_disconnected", self, "_server_disconnected")
+
+func start_connection():
+	character_name = $"CanvasLayer/Panel/Character Name".text
+	
+	peer = NetworkedMultiplayerENet.new()
+	peer.set_compression_mode(NetworkedMultiplayerENet.COMPRESS_RANGE_CODER)
+	peer.create_client($CanvasLayer/Panel/Address.text, int($CanvasLayer/Panel/Port.text))
+	get_tree().network_peer = null
+	get_tree().network_peer = peer
 	
 	var game = game_scene.instance()
 	get_node("/root").add_child(game)
-	get_node("/root/Lobby").visible = false
+	get_node("/root/Lobby/CanvasLayer/Panel").visible = false
 
 func _on_player_connected(id):
 	print(">> " + str(id) )
@@ -75,5 +76,4 @@ remote func set_charater_position(character_position : Vector2, character_direct
 	var player = get_node("/root/Game/PlayerList/"+ str(id))
 	if player:
 		player.global_position = character_position
-		print(character_position, character_direction)
 		player.animate(character_direction, character_direction != Vector2.ZERO)
