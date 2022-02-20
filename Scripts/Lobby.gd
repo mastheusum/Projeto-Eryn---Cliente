@@ -14,17 +14,17 @@ func _ready():
 	get_tree().connect("server_disconnected", self, "_server_disconnected")
 
 func start_connection():
-	character_name = $"CanvasLayer/Panel/Character Name".text
+	character_name = $"CanvasLayer/Login/Panel/Character Name".text
 	
 	peer = NetworkedMultiplayerENet.new()
 	peer.set_compression_mode(NetworkedMultiplayerENet.COMPRESS_RANGE_CODER)
-	peer.create_client($CanvasLayer/Panel/Address.text, int($CanvasLayer/Panel/Port.text))
+	peer.create_client($CanvasLayer/Login/Panel/Address.text, int($CanvasLayer/Login/Panel/Port.text))
 	get_tree().network_peer = null
 	get_tree().network_peer = peer
 	
 	var game = game_scene.instance()
 	get_node("/root").add_child(game)
-	get_node("/root/Lobby/CanvasLayer/Panel").visible = false
+	get_node("/root/Lobby/CanvasLayer/Login").visible = false
 
 func _on_player_connected(id):
 	print(">> " + str(id) )

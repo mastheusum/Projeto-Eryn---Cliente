@@ -15,7 +15,14 @@ script = ExtResource( 1 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+[node name="Login" type="Control" parent="CanvasLayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Login"]
 margin_right = 1024.0
 margin_bottom = 600.0
 texture = ExtResource( 2 )
@@ -25,7 +32,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel" type="Panel" parent="CanvasLayer"]
+[node name="Panel" type="Panel" parent="CanvasLayer/Login"]
 margin_left = 384.0
 margin_top = 192.0
 margin_right = 640.0
@@ -37,7 +44,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label Address" type="Label" parent="CanvasLayer/Panel"]
+[node name="Label Address" type="Label" parent="CanvasLayer/Login/Panel"]
 margin_left = 32.0
 margin_top = 32.0
 margin_right = 128.0
@@ -49,7 +56,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Address" type="LineEdit" parent="CanvasLayer/Panel"]
+[node name="Address" type="LineEdit" parent="CanvasLayer/Login/Panel"]
 margin_left = 128.0
 margin_top = 32.0
 margin_right = 224.0
@@ -57,7 +64,7 @@ margin_bottom = 62.0
 rect_min_size = Vector2( 96, 30 )
 text = "localhost"
 
-[node name="Label Port" type="Label" parent="CanvasLayer/Panel"]
+[node name="Label Port" type="Label" parent="CanvasLayer/Login/Panel"]
 margin_left = 32.0
 margin_top = 72.0
 margin_right = 128.0
@@ -69,7 +76,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Port" type="LineEdit" parent="CanvasLayer/Panel"]
+[node name="Port" type="LineEdit" parent="CanvasLayer/Login/Panel"]
 margin_left = 128.0
 margin_top = 72.0
 margin_right = 224.0
@@ -80,7 +87,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label Character Name" type="Label" parent="CanvasLayer/Panel"]
+[node name="Label Character Name" type="Label" parent="CanvasLayer/Login/Panel"]
 margin_left = 32.0
 margin_top = 112.0
 margin_right = 128.0
@@ -92,7 +99,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Character Name" type="LineEdit" parent="CanvasLayer/Panel"]
+[node name="Character Name" type="LineEdit" parent="CanvasLayer/Login/Panel"]
 margin_left = 128.0
 margin_top = 112.0
 margin_right = 224.0
@@ -103,7 +110,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="CanvasLayer/Panel"]
+[node name="Button" type="Button" parent="CanvasLayer/Login/Panel"]
 margin_left = 64.0
 margin_top = 152.0
 margin_right = 192.0
@@ -114,4 +121,4 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="CanvasLayer/Panel/Button" to="." method="start_connection"]
+[connection signal="pressed" from="CanvasLayer/Login/Panel/Button" to="." method="start_connection"]
