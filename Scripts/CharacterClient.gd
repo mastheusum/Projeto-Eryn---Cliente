@@ -4,6 +4,9 @@ var move_speed = 200
 var direction : Vector2 = Vector2.DOWN
 var path : PoolVector2Array
 
+func _ready():
+	pass
+
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
@@ -31,3 +34,5 @@ func _physics_process(delta):
 	
 	move_and_collide( direction * move_speed * delta )
 	animate(direction, direction != Vector2.ZERO)
+	get_node('/root/Lobby').update_position(global_position, direction)
+

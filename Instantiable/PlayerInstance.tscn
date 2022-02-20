@@ -864,7 +864,11 @@ start_node = "IDLE"
 [sub_resource type="AnimationNodeStateMachinePlayback" id=62]
 
 [node name="PlayerInstance" type="KinematicBody2D"]
+position = Vector2( 512, 256 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -918,7 +922,7 @@ tree_root = SubResource( 61 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 62 )
-parameters/conditions/IsStoped = false
+parameters/conditions/IsStoped = true
 parameters/conditions/IsWalking = false
-parameters/IDLE/blend_position = Vector2( -0.996558, 0.987976 )
+parameters/IDLE/blend_position = Vector2( 0, 1 )
 parameters/Walk/blend_position = Vector2( 0, 0 )

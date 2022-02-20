@@ -1,7 +1,7 @@
 extends Node2D
 
 var peer = null
-var character_name = ""
+var character_name : String = ""
 const player_instance = preload("res://Instantiable/PlayerInstance.tscn")
 const client_script = preload("res://Scripts/CharacterClient.gd")
 const game_scene = preload("res://Scenes/Game.tscn")
@@ -46,26 +46,24 @@ func _server_disconnected():
 	get_tree().network_peer = null
 	pass
 
-func create_player(character_id : int, character_position : Vector2):
-	var player = player_instance.instance()
-	player.name = str(character_id)
-	player.global_position = character_position
-	player.set_network_master(character_id)
-	get_node("/root/Game/PlayerList").add_child(player)
-	return player
-
 func destroy_player(character_id : int):
 	var player = get_node("/root/Game/PlayerList/"+ str(character_id))
 	if player:
 		player.queue_free()
 
+func update_position(character_position : Vector2, character_direction : Vector2):
+	rpc("set_charater_position", character_position, character_direction)
+
 remote func create_character(character_id : int, character_position : Vector2):
-	var player = create_player(character_id, character_position)
+	var player = player_instance.instance()
+	player.name = str(character_id)
+	player.global_position = character_position
+	player.set_network_master(character_id)
 	if character_id == get_tree().get_network_unique_id():
-		player.get_node("ColorRect").color = Color("#ffff00")
 		player.get_node("Name").text = character_name
-		player.set_script(client_script) # don't work
-		rpc_id(1, "set_character_name", character_name)
+		player.set_script(client_script) 
+		rpc_id(1, "set_character_name", character_id, character_name)
+	get_node("/root/Game/PlayerList").add_child(player)
 
 remote func set_character_name(character_id : int, character_name):
 	var player = get_node("/root/Game/PlayerList/"+ str(character_id))
@@ -76,5 +74,6 @@ remote func set_charater_position(character_position : Vector2, character_direct
 	var id = get_tree().get_rpc_sender_id()
 	var player = get_node("/root/Game/PlayerList/"+ str(id))
 	if player:
-		player.global_positionn = character_position
+		player.global_position = character_position
+		print(character_position, character_direction)
 		player.animate(character_direction, character_direction != Vector2.ZERO)
