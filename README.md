@@ -99,7 +99,7 @@ Após conjurar esta magia, esta entrará em tempo de recarga máximo e todas as 
 
 O jogo tem uma ambientação medieval e se passa em uma ilha de clima tropical. Diversas criaturas de diversos tipos coexistem na ilha e são hostis a criaturas desconhecidas como humanos.
 
-[![Ilha de Serdin](https://raw.githubusercontent.com/mastheusum/RPG-Eryn/main/A_Ilha_de_Serdin.jpg "Ilha de Serdin")](https://raw.githubusercontent.com/mastheusum/RPG-Eryn/main/A_Ilha_de_Serdin.jpg "Ilha de Serdin")
+[![Ilha de Serdin](https://raw.githubusercontent.com/mastheusum/Projeto-Eryn---Cliente/main/Sprites/A_Ilha_de_Serdin.jpg "Ilha de Serdin")](https://raw.githubusercontent.com/mastheusum/Projeto-Eryn---Cliente/main/Sprites/A_Ilha_de_Serdin.jpg "Ilha de Serdin")
 
 Serão necessários sete cenários para a construção dessa ilha.
 Ainda não foi definida a estrutura da cidade e nem do subterrâneo.
