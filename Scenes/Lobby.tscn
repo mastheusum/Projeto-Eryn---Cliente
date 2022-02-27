@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://Scripts/Lobby.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Character/Character_Down.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/A_Ilha_de_Serdin.jpg" type="Texture" id=2]
+[ext_resource path="res://Scripts/Lobby.gd" type="Script" id=3]
+[ext_resource path="res://Instantiable/CharacterListButton.tscn" type="PackedScene" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.172549, 0.164706, 0.196078, 0.815686 )
@@ -41,6 +43,13 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.172549, 0.164706, 0.196078, 0.815686 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.580392, 0.156863, 0.156863, 1 )
 border_width_left = 2
@@ -53,19 +62,90 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
+[sub_resource type="StyleBoxFlat" id=14]
+bg_color = Color( 0.172549, 0.164706, 0.196078, 0.815686 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 0.137255, 0.576471, 0.67451, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.172549, 0.172549, 0.172549, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 0.141176, 0.407843, 0.145098, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.172549, 0.172549, 0.172549, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 0.580392, 0.156863, 0.156863, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.172549, 0.172549, 0.172549, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.172549, 0.164706, 0.196078, 0.815686 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.141176, 0.407843, 0.145098, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.172549, 0.172549, 0.172549, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.580392, 0.156863, 0.156863, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.172549, 0.172549, 0.172549, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
 [node name="Lobby" type="Node2D"]
-script = ExtResource( 1 )
+script = ExtResource( 3 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="ConnectServer" type="Control" parent="CanvasLayer"]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ConnectServer"]
+[node name="Background" type="TextureRect" parent="CanvasLayer"]
 margin_right = 1024.0
 margin_bottom = 600.0
 texture = ExtResource( 2 )
@@ -75,8 +155,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ConnectServer" type="Control" parent="CanvasLayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Panel" type="Panel" parent="CanvasLayer/ConnectServer"]
-visible = false
 margin_left = 389.0
 margin_top = 173.0
 margin_right = 645.0
@@ -132,6 +218,7 @@ __meta__ = {
 }
 
 [node name="Label Character Name" type="Label" parent="CanvasLayer/ConnectServer/Panel"]
+visible = false
 margin_left = 32.0
 margin_top = 112.0
 margin_right = 128.0
@@ -144,6 +231,7 @@ __meta__ = {
 }
 
 [node name="Character Name" type="LineEdit" parent="CanvasLayer/ConnectServer/Panel"]
+visible = false
 margin_left = 128.0
 margin_top = 112.0
 margin_right = 224.0
@@ -154,7 +242,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="CanvasLayer/ConnectServer/Panel"]
+[node name="Start Connection" type="Button" parent="CanvasLayer/ConnectServer/Panel"]
 margin_left = 64.0
 margin_top = 152.0
 margin_right = 192.0
@@ -204,7 +292,7 @@ margin_top = 20.0
 margin_right = 235.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 96, 30 )
-text = "username"
+placeholder_text = "username"
 
 [node name="Label Password" type="Label" parent="CanvasLayer/Login/Panel"]
 margin_left = 19.0
@@ -224,12 +312,14 @@ margin_top = 60.0
 margin_right = 235.0
 margin_bottom = 90.0
 rect_min_size = Vector2( 96, 30 )
-text = "password"
+secret = true
+placeholder_text = "password"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label Address" type="Label" parent="CanvasLayer/Login/Panel"]
+visible = false
 margin_left = 19.0
 margin_top = 100.0
 margin_right = 115.0
@@ -242,6 +332,7 @@ __meta__ = {
 }
 
 [node name="Address" type="LineEdit" parent="CanvasLayer/Login/Panel"]
+visible = false
 margin_left = 104.0
 margin_top = 100.0
 margin_right = 235.0
@@ -253,6 +344,7 @@ __meta__ = {
 }
 
 [node name="Label Port" type="Label" parent="CanvasLayer/Login/Panel"]
+visible = false
 margin_left = 19.0
 margin_top = 140.0
 margin_right = 115.0
@@ -265,6 +357,7 @@ __meta__ = {
 }
 
 [node name="Port" type="LineEdit" parent="CanvasLayer/Login/Panel"]
+visible = false
 margin_left = 104.0
 margin_top = 140.0
 margin_right = 235.0
@@ -300,6 +393,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="PanelWait" type="Panel" parent="CanvasLayer/Login"]
+visible = false
+margin_left = 385.0
+margin_top = 231.0
+margin_right = 640.0
+margin_bottom = 320.0
+custom_styles/panel = SubResource( 6 )
+
+[node name="Label" type="Label" parent="CanvasLayer/Login/PanelWait"]
+margin_left = 55.0
+margin_top = 25.0
+margin_right = 188.0
+margin_bottom = 39.0
+text = "Confirming Password"
+
+[node name="PanelWait" type="Timer" parent="CanvasLayer/Login/PanelWait"]
+wait_time = 3.0
+one_shot = true
+
 [node name="CreateAccount" type="Control" parent="CanvasLayer"]
 visible = false
 margin_right = 40.0
@@ -313,14 +425,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 365.0
+margin_left = 300.0
 margin_top = 151.0
-margin_right = 621.0
-margin_bottom = 351.0
+margin_right = 683.0
+margin_bottom = 391.0
 rect_min_size = Vector2( 256, 200 )
 custom_styles/panel = SubResource( 2 )
 __meta__ = {
-"_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
@@ -334,12 +445,12 @@ text = "Username:"
 valign = 1
 
 [node name="Username" type="LineEdit" parent="CanvasLayer/CreateAccount/Panel"]
-margin_left = 104.0
+margin_left = 151.0
 margin_top = 20.0
-margin_right = 235.0
+margin_right = 367.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 96, 30 )
-text = "username"
+placeholder_text = "username"
 
 [node name="Label Password" type="Label" parent="CanvasLayer/CreateAccount/Panel"]
 margin_left = 19.0
@@ -354,43 +465,46 @@ __meta__ = {
 }
 
 [node name="Password" type="LineEdit" parent="CanvasLayer/CreateAccount/Panel"]
-margin_left = 104.0
+margin_left = 151.0
 margin_top = 60.0
-margin_right = 235.0
+margin_right = 367.0
 margin_bottom = 90.0
 rect_min_size = Vector2( 96, 30 )
-text = "password"
+secret = true
+placeholder_text = "password"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label CharName" type="Label" parent="CanvasLayer/CreateAccount/Panel"]
+[node name="Label Password2" type="Label" parent="CanvasLayer/CreateAccount/Panel"]
 margin_left = 19.0
-margin_top = 100.0
-margin_right = 115.0
-margin_bottom = 130.0
+margin_top = 133.0
+margin_right = 131.0
+margin_bottom = 163.0
 rect_min_size = Vector2( 96, 30 )
-text = "Character Name:"
+text = "Repeat password:"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CharName" type="LineEdit" parent="CanvasLayer/CreateAccount/Panel"]
-margin_left = 135.0
-margin_top = 100.0
-margin_right = 235.0
-margin_bottom = 130.0
+[node name="Password2" type="LineEdit" parent="CanvasLayer/CreateAccount/Panel"]
+margin_left = 151.0
+margin_top = 134.0
+margin_right = 367.0
+margin_bottom = 164.0
 rect_min_size = Vector2( 96, 30 )
+secret = true
+placeholder_text = "password"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button CreateAccount" type="Button" parent="CanvasLayer/CreateAccount/Panel"]
-margin_left = 20.0
-margin_top = 150.0
-margin_right = 135.0
-margin_bottom = 180.0
+[node name="CreateNewAccountButton" type="Button" parent="CanvasLayer/CreateAccount/Panel"]
+margin_left = 87.0
+margin_top = 189.0
+margin_right = 202.0
+margin_bottom = 219.0
 rect_min_size = Vector2( 80, 25 )
 custom_styles/normal = SubResource( 3 )
 text = "Create Account"
@@ -398,11 +512,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button Cancel" type="Button" parent="CanvasLayer/CreateAccount/Panel"]
-margin_left = 164.0
-margin_top = 150.0
-margin_right = 234.0
-margin_bottom = 180.0
+[node name="CancelNewAccountButton" type="Button" parent="CanvasLayer/CreateAccount/Panel"]
+margin_left = 231.0
+margin_top = 189.0
+margin_right = 301.0
+margin_bottom = 219.0
 rect_min_size = Vector2( 70, 25 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_styles/normal = SubResource( 5 )
@@ -411,7 +525,49 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="VisiblePassword" type="CheckBox" parent="CanvasLayer/CreateAccount/Panel"]
+margin_left = 184.0
+margin_top = 100.0
+margin_right = 319.0
+margin_bottom = 124.0
+pressed = true
+text = "invisible password"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelResult" type="Panel" parent="CanvasLayer/CreateAccount"]
+visible = false
+margin_left = 400.0
+margin_top = 248.0
+margin_right = 624.0
+margin_bottom = 352.0
+custom_styles/panel = SubResource( 14 )
+
+[node name="Error" type="Label" parent="CanvasLayer/CreateAccount/PanelResult"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 208.0
+margin_bottom = 63.0
+text = "Conta Criada com Sucesso!
+Voltando a tela de login..."
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Confirm" type="Button" parent="CanvasLayer/CreateAccount/PanelResult"]
+margin_left = 98.0
+margin_top = 73.0
+margin_right = 130.0
+margin_bottom = 93.0
+rect_min_size = Vector2( 32, 0 )
+text = "OK"
+
 [node name="CharacterList" type="Control" parent="CanvasLayer"]
+visible = false
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
@@ -423,15 +579,219 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 365.0
+margin_left = 348.0
 margin_top = 151.0
-margin_right = 621.0
+margin_right = 643.0
 margin_bottom = 391.0
 rect_min_size = Vector2( 256, 200 )
 custom_styles/panel = SubResource( 2 )
 __meta__ = {
-"_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="CanvasLayer/ConnectServer/Panel/Button" to="." method="start_connection"]
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/CharacterList/Panel"]
+margin_left = 15.0
+margin_top = 13.0
+margin_right = 279.0
+margin_bottom = 157.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CharacterList/Panel/ScrollContainer"]
+margin_right = 24.0
+margin_bottom = 136.0
+
+[node name="CharacterListButton" parent="CanvasLayer/CharacterList/Panel/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
+margin_right = 24.0
+margin_bottom = 24.0
+
+[node name="CharacterListButton2" parent="CanvasLayer/CharacterList/Panel/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
+margin_top = 28.0
+margin_right = 24.0
+margin_bottom = 52.0
+
+[node name="CharacterListButton3" parent="CanvasLayer/CharacterList/Panel/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
+margin_top = 56.0
+margin_right = 24.0
+margin_bottom = 80.0
+
+[node name="CharacterListButton4" parent="CanvasLayer/CharacterList/Panel/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
+margin_top = 84.0
+margin_right = 24.0
+margin_bottom = 108.0
+
+[node name="CharacterListButton5" parent="CanvasLayer/CharacterList/Panel/ScrollContainer/VBoxContainer" instance=ExtResource( 5 )]
+margin_top = 112.0
+margin_right = 24.0
+margin_bottom = 136.0
+
+[node name="SelectCharacterButton" type="Button" parent="CanvasLayer/CharacterList/Panel"]
+margin_left = 15.0
+margin_top = 165.0
+margin_right = 130.0
+margin_bottom = 195.0
+rect_min_size = Vector2( 80, 25 )
+custom_styles/normal = SubResource( 12 )
+disabled = true
+text = "Select"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NewCharacterButton" type="Button" parent="CanvasLayer/CharacterList/Panel"]
+margin_left = 93.0
+margin_top = 205.0
+margin_right = 208.0
+margin_bottom = 235.0
+rect_min_size = Vector2( 80, 25 )
+custom_styles/normal = SubResource( 11 )
+text = "Create"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LogoutButton" type="Button" parent="CanvasLayer/CharacterList/Panel"]
+margin_left = 164.0
+margin_top = 165.0
+margin_right = 279.0
+margin_bottom = 195.0
+rect_min_size = Vector2( 70, 25 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_styles/normal = SubResource( 13 )
+text = "Logout"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CreateNewCharacter" type="Control" parent="CanvasLayer"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="CanvasLayer/CreateNewCharacter"]
+margin_left = 360.0
+margin_top = 191.0
+margin_right = 664.0
+margin_bottom = 392.0
+custom_styles/panel = SubResource( 7 )
+
+[node name="CharacterName Label" type="Label" parent="CanvasLayer/CreateNewCharacter/Panel"]
+margin_left = 16.0
+margin_top = 30.0
+margin_right = 118.0
+margin_bottom = 44.0
+text = "Character Name"
+align = 1
+valign = 1
+
+[node name="CharacterName" type="LineEdit" parent="CanvasLayer/CreateNewCharacter/Panel"]
+margin_left = 140.0
+margin_top = 17.0
+margin_right = 281.0
+margin_bottom = 57.0
+align = 1
+placeholder_text = "Type your name"
+
+[node name="Carroussel" type="Control" parent="CanvasLayer/CreateNewCharacter/Panel"]
+margin_left = 16.0
+margin_top = 65.0
+margin_right = 280.0
+margin_bottom = 160.0
+
+[node name="LeftButton" type="Button" parent="CanvasLayer/CreateNewCharacter/Panel/Carroussel"]
+margin_left = 8.0
+margin_top = 40.0
+margin_right = 20.0
+margin_bottom = 60.0
+text = "<"
+
+[node name="RightButton" type="Button" parent="CanvasLayer/CreateNewCharacter/Panel/Carroussel"]
+margin_left = 243.0
+margin_top = 40.0
+margin_right = 263.0
+margin_bottom = 60.0
+text = ">"
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/CreateNewCharacter/Panel/Carroussel"]
+margin_left = 88.0
+margin_top = 8.0
+margin_right = 128.0
+margin_bottom = 48.0
+rect_scale = Vector2( 2.5, 2.5 )
+texture = SubResource( 8 )
+expand = true
+
+[node name="CreateCharacterButton" type="Button" parent="CanvasLayer/CreateNewCharacter/Panel"]
+margin_left = 24.0
+margin_top = 164.0
+margin_right = 139.0
+margin_bottom = 194.0
+rect_min_size = Vector2( 80, 25 )
+custom_styles/normal = SubResource( 9 )
+disabled = true
+text = "Create"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CancelCreateCharacterButton" type="Button" parent="CanvasLayer/CreateNewCharacter/Panel"]
+margin_left = 168.0
+margin_top = 164.0
+margin_right = 283.0
+margin_bottom = 194.0
+rect_min_size = Vector2( 70, 25 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_styles/normal = SubResource( 10 )
+text = "Cancel"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelResult" type="Panel" parent="CanvasLayer/CreateNewCharacter"]
+visible = false
+margin_left = 400.0
+margin_top = 248.0
+margin_right = 624.0
+margin_bottom = 352.0
+custom_styles/panel = SubResource( 14 )
+
+[node name="Error" type="Label" parent="CanvasLayer/CreateNewCharacter/PanelResult"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 208.0
+margin_bottom = 63.0
+text = "Erro ao Criar Personagem"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Confirm" type="Button" parent="CanvasLayer/CreateNewCharacter/PanelResult"]
+margin_left = 98.0
+margin_top = 73.0
+margin_right = 130.0
+margin_bottom = 93.0
+rect_min_size = Vector2( 32, 0 )
+text = "OK"
+
+[connection signal="pressed" from="CanvasLayer/ConnectServer/Panel/Start Connection" to="." method="connect_server"]
+[connection signal="pressed" from="CanvasLayer/Login/Panel/Button Login" to="." method="authenticate_account"]
+[connection signal="pressed" from="CanvasLayer/Login/Panel/Button CreateAccount" to="." method="_on_Button_CreateAccount_pressed"]
+[connection signal="timeout" from="CanvasLayer/Login/PanelWait/PanelWait" to="." method="_on_PanelWait_timeout"]
+[connection signal="pressed" from="CanvasLayer/CreateAccount/Panel/CreateNewAccountButton" to="." method="_on_CreateNewAccountButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/CreateAccount/Panel/CancelNewAccountButton" to="." method="_on_CancelNewAccountButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/CreateAccount/Panel/VisiblePassword" to="." method="_on_CreateAccountCheckBox_pressed"]
+[connection signal="pressed" from="CanvasLayer/CreateAccount/PanelResult/Confirm" to="." method="_on_NewAccountConfirm_pressed"]
+[connection signal="pressed" from="CanvasLayer/CharacterList/Panel/SelectCharacterButton" to="." method="_on_SelectCharacterButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/CharacterList/Panel/NewCharacterButton" to="." method="_on_NewCharacterButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/CharacterList/Panel/LogoutButton" to="." method="_on_LogoutButton_pressed"]
+[connection signal="text_changed" from="CanvasLayer/CreateNewCharacter/Panel/CharacterName" to="." method="_on_CharacterName_text_changed"]
+[connection signal="pressed" from="CanvasLayer/CreateNewCharacter/Panel/CreateCharacterButton" to="." method="_on_CreateCharacterButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/CreateNewCharacter/Panel/CancelCreateCharacterButton" to="." method="_on_Confirm_pressed"]
+[connection signal="pressed" from="CanvasLayer/CreateNewCharacter/PanelResult/Confirm" to="." method="_on_NewCharacterConfirm_pressed"]

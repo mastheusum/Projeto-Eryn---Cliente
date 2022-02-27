@@ -9,13 +9,37 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "PlayableCharacter",
+"class": "Character",
+"language": "GDScript",
+"path": "res://Scripts/Bases/Character.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "CharacterBase",
 "language": "GDScript",
 "path": "res://Scripts/CharacterBase.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Creature",
+"language": "GDScript",
+"path": "res://Scripts/Bases/Creature.gd"
+}, {
+"base": "Creature",
+"class": "NoPlayableCharacter",
+"language": "GDScript",
+"path": "res://Scripts/Bases/NoPlayableCharacter.gd"
+}, {
+"base": "Creature",
+"class": "PlayableCharacter",
+"language": "GDScript",
+"path": "res://Scripts/Bases/PlayableCharacter.gd"
 } ]
 _global_script_class_icons={
-"CharacterBase": ""
+"Character": "",
+"CharacterBase": "",
+"Creature": "",
+"NoPlayableCharacter": "",
+"PlayableCharacter": ""
 }
 
 [application]
@@ -23,6 +47,11 @@ _global_script_class_icons={
 config/name="Projeto Eryn - Cliente"
 run/main_scene="res://Scenes/Lobby.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+ConnectionManager="*res://Scripts/Managers/ConnectionManager.gd"
+GameManager="*res://Scripts/Managers/GameManager.gd"
 
 [display]
 
