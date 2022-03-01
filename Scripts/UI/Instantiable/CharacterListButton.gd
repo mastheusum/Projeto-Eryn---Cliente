@@ -1,5 +1,7 @@
 extends CheckBox
 
+class_name CharacterListButton
+
 var character_id : int
 var character_name : String = ""
 var character_level : int

@@ -9,9 +9,6 @@ const game_scene = preload("res://Scenes/Game.tscn")
 func _ready():
 	get_tree().connect("network_peer_connected", self, "_on_player_connected")
 	get_tree().connect("network_peer_disconnected", self, "_on_player_disconnected")
-	get_tree().connect("connected_to_server", self,"_connection_ok")
-	get_tree().connect("connection_failed", self, "_connection_fail")
-	get_tree().connect("server_disconnected", self, "_server_disconnected")
 
 func start_connection(address : String, port : int):
 	peer = NetworkedMultiplayerENet.new()
@@ -29,54 +26,59 @@ func _on_player_connected(id):
 func _on_player_disconnected(id):
 	pass
 
-func _connection_ok():
+# REQUESTS
+remote func request_login(username : String, password : String):
 	pass
 
-func _connection_fail():
+remote func request_logout(token : String):
 	pass
 
-func _server_disconnected():
-	print("-- end --")
-
-remote func create_new_account(username : String, password : String):
+remote func request_new_account(username : String, password : String ):
 	pass
 
-remote func result_new_account(err : int):
-	var result = "Conta Criada com Sucesso!"
-	if err == 2:
-		result = "Usuário já cadastrado..."
-	get_node("/root/Lobby").new_account_result(result)
-
-remote func authenticate_account(username : String, password : String):
+remote func request_character_list(token : String):
 	pass
 
-remote func authentication_result(result : bool, account_id : int, token : String):
-	if result:
+remote func request_create_new_character(token : String, character_name : String):
+	pass
+
+remote func request_sign_in_character(token : String, character_id : int):
+	pass
+
+remote func request_sign_out_character(token : String):
+	pass
+
+# RESPONSES
+remote func response_login(account_id : int, token : String):
+	if account_id > 0 and token != "":
 		GameManager.set_account_logged(account_id, token)
 	else:
-		print("Invalid Credentials")
+		get_node('/root/Lobby/CanvasLayer/Control/Control Login').configure_panel_wait("Invalid Credentials", 2.0)
 
-remote func sign_out(token : String):
-	pass
+remote func response_logout():
+	GameManager.set_account_logged(-1, "")
 
-remote func get_characters_list(account_id : int, token : String):
-	pass
+remote func response_new_account( error : String ):
+	get_node('/root/Lobby/CanvasLayer/Control/Control Create New Account').configure_panel_wait(error)
 
-remote func set_characters_list(character_list : Array):
-	get_node('/root/Lobby').set_character_list( character_list )
-	pass
+remote func response_character_list(character_list : Array):
+	get_node('/root/Lobby/CanvasLayer/Control/Control Character List').configure_character_list(character_list)
 
-remote func character_selected(character_id : int):
-	pass
+remote func response_create_new_character(error : String):
+	get_node('/root/Lobby/CanvasLayer/Control/Control Create New Character').config_panel_result(error, true)
 
-remote func create_new_character(account_id : int, token : String, character : Dictionary):
-	pass
+remote func response_sign_in(character_list : Dictionary):
+	GameManager.create_character( character_list )
 
-remote func result_new_character(err : int):
-	var result = "Personagem Criado com Sucesso!"
-	if err == 2:
-		result = "Nome já cadastrado..."
-	get_node("/root/Lobby").new_character_result(result)
+remote func response_sign_out(character_list : Array):
+	if character_list.has( str( get_tree().get_network_unique_id() ) ):
+		GameManager.exit_game()
+	else:
+		for gateway in character_list:
+			GameManager.destroy_character( int(gateway) )
 
-remote func set_charater_position(character_position : Vector2, character_direction : Vector2):
-	pass
+# ---------------------
+
+remote func set_charater_position(global_pos, direction):
+	var id = get_tree().get_rpc_sender_id()
+	GameManager.set_character_position(id, global_pos, direction)

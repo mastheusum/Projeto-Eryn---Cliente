@@ -1,12 +1,12 @@
-[gd_scene load_steps=82 format=2]
+[gd_scene load_steps=87 format=2]
 
-[ext_resource path="res://Scripts/CharacterBase.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Bases/Character.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Character/Character_Down.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Character/Character_DownLeft.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Character/Character_UpRight.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/Character/Character_Right.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Character/Character_UpRight.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Character/Character_Left.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/Character/Character_DownRight.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/Character/Character_Left.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Character/Character_DownLeft.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/Character/Character_Up.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/Character/Character_UpLeft.png" type="Texture" id=9]
 
@@ -27,19 +27,19 @@ atlas = ExtResource( 9 )
 region = Rect2( 96, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 7 )
 region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 7 )
 region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 7 )
 region = Rect2( 64, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 3 )
+atlas = ExtResource( 7 )
 region = Rect2( 96, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=14]
@@ -75,35 +75,35 @@ atlas = ExtResource( 8 )
 region = Rect2( 96, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 7 )
+atlas = ExtResource( 5 )
 region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 7 )
+atlas = ExtResource( 5 )
 region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=24]
-atlas = ExtResource( 7 )
+atlas = ExtResource( 5 )
 region = Rect2( 64, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=25]
-atlas = ExtResource( 7 )
+atlas = ExtResource( 5 )
 region = Rect2( 96, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=26]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=27]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 3 )
 region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=28]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 3 )
 region = Rect2( 64, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=29]
-atlas = ExtResource( 5 )
+atlas = ExtResource( 3 )
 region = Rect2( 96, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=30]
@@ -138,7 +138,7 @@ region = Rect2( 64, 0, 32, 32 )
 atlas = ExtResource( 2 )
 region = Rect2( 96, 0, 32, 32 )
 
-[sub_resource type="SpriteFrames" id=5]
+[sub_resource type="SpriteFrames" id=107]
 animations = [ {
 "frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
 "loop": true,
@@ -181,7 +181,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="Animation" id=34]
+[sub_resource type="Animation" id=108]
 resource_name = "IDLE Down"
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
@@ -220,7 +220,7 @@ tracks/2/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=36]
+[sub_resource type="Animation" id=109]
 resource_name = "IDLE DownLeft"
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
@@ -259,7 +259,7 @@ tracks/2/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=37]
+[sub_resource type="Animation" id=110]
 resource_name = "IDLE DownRight"
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
@@ -298,7 +298,7 @@ tracks/2/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=38]
+[sub_resource type="Animation" id=111]
 resource_name = "IDLE Left"
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
@@ -337,7 +337,7 @@ tracks/2/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=39]
+[sub_resource type="Animation" id=112]
 resource_name = "IDLE Right"
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
@@ -376,7 +376,7 @@ tracks/2/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=40]
+[sub_resource type="Animation" id=113]
 resource_name = "IDLE Up"
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
@@ -415,7 +415,7 @@ tracks/2/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=41]
+[sub_resource type="Animation" id=114]
 resource_name = "IDLE UpLeft"
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
@@ -454,7 +454,7 @@ tracks/2/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=42]
+[sub_resource type="Animation" id=115]
 resource_name = "IDLE UpRight"
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
@@ -493,7 +493,7 @@ tracks/2/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=35]
+[sub_resource type="Animation" id=116]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
@@ -544,7 +544,7 @@ tracks/3/keys = {
 "values": [ 1.0 ]
 }
 
-[sub_resource type="Animation" id=43]
+[sub_resource type="Animation" id=117]
 resource_name = "Walk Down"
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
@@ -571,7 +571,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=44]
+[sub_resource type="Animation" id=118]
 resource_name = "Walk DownLeft"
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
@@ -598,7 +598,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=45]
+[sub_resource type="Animation" id=119]
 resource_name = "Walk DownRight"
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
@@ -625,7 +625,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=46]
+[sub_resource type="Animation" id=120]
 resource_name = "Walk Left"
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
@@ -652,7 +652,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=47]
+[sub_resource type="Animation" id=121]
 resource_name = "Walk Right"
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
@@ -679,7 +679,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=48]
+[sub_resource type="Animation" id=122]
 resource_name = "Walk Up"
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
@@ -706,7 +706,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=49]
+[sub_resource type="Animation" id=123]
 resource_name = "Walk UpLeft"
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
@@ -733,7 +733,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=50]
+[sub_resource type="Animation" id=124]
 resource_name = "Walk UpRight"
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
@@ -853,7 +853,7 @@ advance_condition = "IsWalking"
 [sub_resource type="AnimationNodeStateMachineTransition" id=72]
 advance_condition = "IsStoped"
 
-[sub_resource type="AnimationNodeStateMachine" id=61]
+[sub_resource type="AnimationNodeStateMachine" id=125]
 states/IDLE/node = SubResource( 59 )
 states/IDLE/position = Vector2( 367, 136 )
 states/Walk/node = SubResource( 60 )
@@ -861,68 +861,136 @@ states/Walk/position = Vector2( 590, 136 )
 transitions = [ "IDLE", "Walk", SubResource( 71 ), "Walk", "IDLE", SubResource( 72 ) ]
 start_node = "IDLE"
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=62]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=126]
 
-[node name="PlayerInstance" type="KinematicBody2D"]
-position = Vector2( 512, 256 )
+[sub_resource type="StyleBoxFlat" id=127]
+bg_color = Color( 0, 0.784314, 0, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id=128]
+bg_color = Color( 0, 0.784314, 0, 0.196078 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id=129]
+bg_color = Color( 0, 0.588235, 0.784314, 1 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id=130]
+bg_color = Color( 0, 0.588235, 0.784314, 0.196078 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id=131]
+bg_color = Color( 1, 0.556863, 0.556863, 1 )
+
+[node name="Character" type="KinematicBody2D"]
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-margin_left = -20.0
-margin_top = -20.0
-margin_right = 20.0
-margin_bottom = 20.0
-color = Color( 0.929412, 0.341176, 0.341176, 0.392157 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Name" type="Label" parent="."]
-margin_left = -100.0
-margin_top = -48.0
-margin_right = -60.0
-margin_bottom = -34.0
-rect_min_size = Vector2( 200, 30 )
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 2, 2 )
-frames = SubResource( 5 )
+frames = SubResource( 107 )
 animation = "Down"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-"anims/IDLE Down" = SubResource( 34 )
-"anims/IDLE DownLeft" = SubResource( 36 )
-"anims/IDLE DownRight" = SubResource( 37 )
-"anims/IDLE Left" = SubResource( 38 )
-"anims/IDLE Right" = SubResource( 39 )
-"anims/IDLE Up" = SubResource( 40 )
-"anims/IDLE UpLeft" = SubResource( 41 )
-"anims/IDLE UpRight" = SubResource( 42 )
-anims/RESET = SubResource( 35 )
-"anims/Walk Down" = SubResource( 43 )
-"anims/Walk DownLeft" = SubResource( 44 )
-"anims/Walk DownRight" = SubResource( 45 )
-"anims/Walk Left" = SubResource( 46 )
-"anims/Walk Right" = SubResource( 47 )
-"anims/Walk Up" = SubResource( 48 )
-"anims/Walk UpLeft" = SubResource( 49 )
-"anims/Walk UpRight" = SubResource( 50 )
+"anims/IDLE Down" = SubResource( 108 )
+"anims/IDLE DownLeft" = SubResource( 109 )
+"anims/IDLE DownRight" = SubResource( 110 )
+"anims/IDLE Left" = SubResource( 111 )
+"anims/IDLE Right" = SubResource( 112 )
+"anims/IDLE Up" = SubResource( 113 )
+"anims/IDLE UpLeft" = SubResource( 114 )
+"anims/IDLE UpRight" = SubResource( 115 )
+anims/RESET = SubResource( 116 )
+"anims/Walk Down" = SubResource( 117 )
+"anims/Walk DownLeft" = SubResource( 118 )
+"anims/Walk DownRight" = SubResource( 119 )
+"anims/Walk Left" = SubResource( 120 )
+"anims/Walk Right" = SubResource( 121 )
+"anims/Walk Up" = SubResource( 122 )
+"anims/Walk UpLeft" = SubResource( 123 )
+"anims/Walk UpRight" = SubResource( 124 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 61 )
+tree_root = SubResource( 125 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 62 )
+parameters/playback = SubResource( 126 )
 parameters/conditions/IsStoped = true
 parameters/conditions/IsWalking = false
-parameters/IDLE/blend_position = Vector2( 0, 1 )
+parameters/IDLE/blend_position = Vector2( -0.803502, 0.801724 )
 parameters/Walk/blend_position = Vector2( 0, 0 )
+
+[node name="HUD" type="Node2D" parent="."]
+position = Vector2( 0, -64 )
+z_index = 100
+
+[node name="CharacterName" type="Label" parent="HUD"]
+margin_left = -100.0
+margin_top = -8.0
+margin_right = 100.0
+margin_bottom = 12.0
+rect_min_size = Vector2( 200, 20 )
+text = "Character Name"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LifeBar" type="ProgressBar" parent="HUD"]
+margin_left = -50.0
+margin_top = 15.0
+margin_right = 50.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 100, 10 )
+custom_styles/fg = SubResource( 127 )
+custom_styles/bg = SubResource( 128 )
+value = 50.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ManaBar" type="ProgressBar" parent="HUD"]
+margin_left = -50.0
+margin_top = 25.0
+margin_right = 50.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 100, 10 )
+custom_styles/fg = SubResource( 129 )
+custom_styles/bg = SubResource( 130 )
+value = 50.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Sign_out" type="Button" parent="CanvasLayer"]
+margin_left = 936.0
+margin_top = 16.0
+margin_right = 1006.0
+margin_bottom = 46.0
+rect_min_size = Vector2( 70, 30 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_styles/normal = SubResource( 131 )
+text = "Sign out"
+__meta__ = {
+"_edit_use_anchors_": false
+}
