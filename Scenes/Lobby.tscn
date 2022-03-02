@@ -8,8 +8,8 @@
 [ext_resource path="res://Scripts/UI/Control Character List.gd" type="Script" id=6]
 [ext_resource path="res://Scripts/UI/Control Create New Character.gd" type="Script" id=7]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.172549, 0.164706, 0.196078, 0.815686 )
+[sub_resource type="StyleBoxFlat" id=132]
+bg_color = Color( 0.172549, 0.164706, 0.196078, 0.470588 )
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -180,7 +180,7 @@ margin_top = 173.0
 margin_right = 645.0
 margin_bottom = 389.0
 rect_min_size = Vector2( 256, 200 )
-custom_styles/panel = SubResource( 1 )
+custom_styles/panel = SubResource( 132 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

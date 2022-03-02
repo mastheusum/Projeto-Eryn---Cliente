@@ -1,0 +1,77 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/UI/Chat.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxFlat" id=132]
+bg_color = Color( 0.172549, 0.164706, 0.196078, 0.470588 )
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Chat" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -512.0
+margin_bottom = -448.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 512, 152 )
+custom_styles/panel = SubResource( 132 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 520, 152 )
+follow_focus = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+margin_right = 512.0
+margin_bottom = 152.0
+rect_min_size = Vector2( 512, 152 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer"]
+margin_right = 512.0
+margin_bottom = 124.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+scroll_following = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+margin_top = 128.0
+margin_right = 512.0
+margin_bottom = 152.0
+
+[node name="EditMessage" type="LineEdit" parent="ScrollContainer/VBoxContainer/HBoxContainer"]
+margin_right = 462.0
+margin_bottom = 24.0
+focus_neighbour_right = NodePath("../SendMessage")
+focus_next = NodePath("../SendMessage")
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SendMessage" type="Button" parent="ScrollContainer/VBoxContainer/HBoxContainer"]
+margin_left = 466.0
+margin_right = 512.0
+margin_bottom = 24.0
+focus_neighbour_left = NodePath("../EditMessage")
+focus_previous = NodePath("../EditMessage")
+text = "SEND"
+
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/HBoxContainer/SendMessage" to="." method="_on_SendMessage_pressed"]

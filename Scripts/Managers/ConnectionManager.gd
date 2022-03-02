@@ -67,9 +67,13 @@ remote func response_character_list(character_list : Array):
 remote func response_create_new_character(error : String):
 	get_node('/root/Lobby/CanvasLayer/Control/Control Create New Character').config_panel_result(error, true)
 
+# This function will receive a dictionary with gateways as keys
+# every key has another dictionary with contains the character info
 remote func response_sign_in(character_list : Dictionary):
 	GameManager.create_character( character_list )
 
+# This funcion will receive a list of geteways that will need destroy
+# if the in the list have your own gateway then this client are leaving the game
 remote func response_sign_out(character_list : Array):
 	if character_list.has( str( get_tree().get_network_unique_id() ) ):
 		GameManager.exit_game()
@@ -82,3 +86,8 @@ remote func response_sign_out(character_list : Array):
 remote func set_charater_position(global_pos, direction):
 	var id = get_tree().get_rpc_sender_id()
 	GameManager.set_character_position(id, global_pos, direction)
+
+remotesync func get_message(message : String):
+	var gateway_id = get_tree().get_rpc_sender_id()
+	GameManager.get_message(gateway_id, message)
+

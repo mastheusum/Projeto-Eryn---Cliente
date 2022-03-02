@@ -40,7 +40,30 @@ func exit_game():
 	ConnectionManager.rpc_id(1, 'request_sign_out_character', token, int(my_character_id) )
 
 func set_character_position(gateway_id : int, global_pos : Vector2, direction : Vector2):
-	var character = get_node('/root/Game/PlayerList').get_node( str(gateway_id) )
+	if in_game:
+		var character = get_node('/root/Game/PlayerList').get_node( str(gateway_id) )
+		if character:
+			character.global_position = global_pos
+			character._animate(direction, direction != Vector2.ZERO)
+
+func get_character_name(gateway_id : int) -> String:
+	var list = get_node("/root/Game/PlayerList")
+	var character = list.get_node(str(gateway_id))
 	if character:
-		character.global_position = global_pos
-		character._animate(direction, direction != Vector2.ZERO)
+		return (character as Creature).creature_name
+	return ''
+
+func get_message(gateway_id : int, message : String):
+	if in_game:
+		var list = get_node("/root/Game/PlayerList")
+		
+		var sender = get_character_name(gateway_id)
+		var sender_position = list.get_node(str(gateway_id)).global_position + Vector2(0, -112)
+		
+		var character = list.get_node(my_character_id)
+		
+		var self_message = gateway_id == get_tree().get_network_unique_id()
+		
+		var text = character.get_node('CanvasLayer/Chat').receive_new_message(sender, message, self_message)
+		
+		get_node('/root/Game').create_text_in_map(text, sender_position)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=86 format=2]
 
-[ext_resource path="res://Scripts/Bases/PlayableCharacter.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Bases/CharacterProxy.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Character/Character_Down.png" type="Texture" id=2]
 [ext_resource path="res://Sprites/Character/Character_UpRight.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/Character/Character_Right.png" type="Texture" id=4]

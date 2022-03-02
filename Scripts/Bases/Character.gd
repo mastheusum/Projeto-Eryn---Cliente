@@ -28,26 +28,36 @@ func recover_mana():
 	mana = max_mana
 
 func _ready():
-	$HUD/CharacterName.text = creature_name
-	$HUD/LifeBar.max_value = max_life
-	$HUD/LifeBar.value = life
-	$HUD/ManaBar.max_value = max_mana
-	$HUD/ManaBar.value = mana
+	$CanvasLayer/Status/CharacterName.text = creature_name
+	$CanvasLayer/Status/LifeBar.max_value = max_life
+	$CanvasLayer/Status/LifeBar.value = life
+	$CanvasLayer/Status/ManaBar.max_value = max_mana
+	$CanvasLayer/Status/ManaBar.value = mana
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and event.pressed:
 			var start_pos = global_position
 			var end_pos = get_global_mouse_position()
-			_path = get_parent().get_node("Navigation2D").get_simple_path(start_pos, end_pos)
-			get_parent().get_node("Navigation2D/Line2D").points = _path
-			_path.remove(0)
+#			_path = get_parent().get_node("Navigation2D").get_simple_path(start_pos, end_pos)
+#			get_parent().get_node("Navigation2D/Line2D").points = _path
+#			_path.remove(0)
+	elif event is InputEventKey:
+		if event.is_action_pressed("ui_up"):
+			_direction.y = - event.get_action_strength("ui_up")
+		elif event.is_action_pressed("ui_down"):
+			_direction.y = event.get_action_strength("ui_down")
+		elif event.is_action_released("ui_up") or event.is_action_released("ui_down"):
+			_direction.y = 0
+		if event.is_action_pressed("ui_left"):
+			_direction.x = - event.get_action_strength("ui_left")
+		elif event.is_action_pressed("ui_right"):
+			_direction.x = event.get_action_strength("ui_right")
+		elif event.is_action_released("ui_left") or event.is_action_released("ui_right"):
+			_direction.x = 0
 
 func _physics_process(delta):
-	if _path.empty():
-		_direction.x = Input.get_action_raw_strength("ui_right") - Input.get_action_raw_strength("ui_left")
-		_direction.y = Input.get_action_raw_strength("ui_down") - Input.get_action_raw_strength("ui_up")
-	else:
+	if not _path.empty():
 		if _direction == Vector2.ZERO:
 			_direction = _path[0] - global_position
 		else:

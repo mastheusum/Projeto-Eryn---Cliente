@@ -3,6 +3,8 @@ extends Node2D
 var character_node = preload("res://Instantiable/Character.tscn")
 var character_proxy_node = preload("res://Instantiable/CharacterProxy.tscn")
 
+var map_message_node = preload("res://Instantiable/UI/MapMessage.tscn")
+
 func add_character_from_game(gateway_id : int, character : Dictionary):
 	var player
 	if gateway_id == get_tree().get_network_unique_id():
@@ -34,3 +36,10 @@ func remove_character_from_game(gateway_id : int):
 func remove_all():
 	for child in $PlayerList.get_children():
 		child.queue_free()
+
+func create_text_in_map(text : String, global_pos : Vector2):
+	var new_message = map_message_node.instance()
+	new_message.set_text(text)
+	new_message.global_position = global_pos
+	$Messages.add_child(new_message)
+

@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/UI/Instantiable/MapMessage.gd" type="Script" id=1]
+
+[node name="MapMessage" type="Node2D"]
+position = Vector2( 0, -112 )
+z_index = 110
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Message" type="RichTextLabel" parent="."]
+modulate = Color( 1, 1, 0, 1 )
+margin_left = -150.0
+margin_right = 150.0
+margin_bottom = 14.0
+bbcode_enabled = true
+bbcode_text = "[center][/center]
+"
+text = "
+"
+fit_content_height = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
