@@ -7,11 +7,9 @@ var life : int
 var max_mana : int
 var mana : int
 var level : int
-var attack_range : float
+var attack_range : float = 50
 
-func receive_damage(value : int):
-	if life <= 0:
-		_on_dead()
+func receive_damage(value : int, type : int):
 	pass
 
 func attack(target_id : int, max_range : float, power : int):

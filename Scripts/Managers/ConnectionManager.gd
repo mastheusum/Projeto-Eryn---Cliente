@@ -84,10 +84,29 @@ remote func response_sign_out(character_list : Array):
 # ---------------------
 
 remote func set_charater_position(global_pos, direction):
-	var id = get_tree().get_rpc_sender_id()
-	GameManager.set_character_position(id, global_pos, direction)
+	if GameManager.in_game:
+		var id = get_tree().get_rpc_sender_id()
+		GameManager.set_character_position(id, global_pos, direction)
 
 remotesync func get_message(message : String):
-	var gateway_id = get_tree().get_rpc_sender_id()
-	GameManager.get_message(gateway_id, message)
+	if GameManager.in_game:
+		var gateway_id = get_tree().get_rpc_sender_id()
+		GameManager.get_message(gateway_id, message)
+
+# This function is called when player receive a damage
+# then this damage is send to al another players connecteds
+remotesync func get_status_alert(message : String, type : int):
+	if GameManager.in_game:
+		var gateway_id = get_tree().get_rpc_sender_id()
+		GameManager.get_status_alert(gateway_id, message, type)
+
+# used by player to receive damage by other players
+remote func attack_character(power : int, type : int):
+	GameManager.get_character(get_tree().get_network_unique_id()).receive_damage(power, type)
+
+# ussed to update CharacterProxyes's life and mana 
+remote func update_status(gateway_id : int, life : int, mana : int):
+	if GameManager.in_game:
+		if gateway_id != get_tree().get_network_unique_id():
+			GameManager.get_character(gateway_id).update_status(life, mana)
 

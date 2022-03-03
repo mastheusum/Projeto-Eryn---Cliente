@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=2]
+[gd_scene load_steps=89 format=2]
 
 [ext_resource path="res://Scripts/Bases/Character.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Character/Character_Down.png" type="Texture" id=2]
@@ -181,6 +181,9 @@ animations = [ {
 "name": "Down",
 "speed": 5.0
 } ]
+
+[sub_resource type="CircleShape2D" id=132]
+radius = 16.4924
 
 [sub_resource type="Animation" id=108]
 resource_name = "IDLE Down"
@@ -896,13 +899,17 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
 [node name="Character" type="KinematicBody2D"]
-position = Vector2( 512, 300 )
+z_index = 2
 script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 2, 2 )
 frames = SubResource( 107 )
 animation = "Down"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 4 )
+shape = SubResource( 132 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 "anims/IDLE Down" = SubResource( 108 )
@@ -961,8 +968,9 @@ __meta__ = {
 }
 
 [node name="CharacterName" type="Label" parent="CanvasLayer/Status"]
+margin_top = -8.0
 margin_right = 200.0
-margin_bottom = 20.0
+margin_bottom = 12.0
 rect_min_size = Vector2( 200, 20 )
 text = "Character Name"
 align = 1
@@ -974,9 +982,9 @@ __meta__ = {
 
 [node name="LifeBar" type="ProgressBar" parent="CanvasLayer/Status"]
 margin_left = 50.0
-margin_top = 23.0
+margin_top = 16.0
 margin_right = 150.0
-margin_bottom = 33.0
+margin_bottom = 26.0
 rect_min_size = Vector2( 100, 10 )
 custom_styles/fg = SubResource( 127 )
 custom_styles/bg = SubResource( 128 )
@@ -1003,3 +1011,14 @@ __meta__ = {
 [node name="Chat" parent="CanvasLayer" instance=ExtResource( 10 )]
 margin_top = 448.0
 margin_bottom = 0.0
+
+[node name="RecoveryLife" type="Timer" parent="."]
+
+[node name="RecoveryMana" type="Timer" parent="."]
+
+[node name="AttackInterval" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="RecoveryLife" to="." method="_on_RecoveryLife_timeout"]
+[connection signal="timeout" from="RecoveryMana" to="." method="_on_RecoveryMana_timeout"]
+[connection signal="timeout" from="AttackInterval" to="." method="_on_AttackInterval_timeout"]

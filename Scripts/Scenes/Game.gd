@@ -4,6 +4,7 @@ var character_node = preload("res://Instantiable/Character.tscn")
 var character_proxy_node = preload("res://Instantiable/CharacterProxy.tscn")
 
 var map_message_node = preload("res://Instantiable/UI/MapMessage.tscn")
+var map_alert_node = preload("res://Instantiable/UI/MessageAlert.tscn")
 
 func add_character_from_game(gateway_id : int, character : Dictionary):
 	var player
@@ -43,3 +44,8 @@ func create_text_in_map(text : String, global_pos : Vector2):
 	new_message.global_position = global_pos
 	$Messages.add_child(new_message)
 
+func create_alert_in_map(message : String, type: int, global_pos : Vector2):
+	var new_alert = map_alert_node.instance()
+	new_alert.config(message, type)
+	new_alert.global_position = global_pos
+	$Messages.add_child(new_alert)

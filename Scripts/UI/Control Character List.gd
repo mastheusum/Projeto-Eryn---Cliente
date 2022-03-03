@@ -18,7 +18,7 @@ func _on_NewCharacterButton_pressed():
 	get_node("/root/Lobby").character_list_to_create_character(true)
 
 func _on_LogoutButton_pressed():
-	ConnectionManager.request_logout(GameManager.token)
+	ConnectionManager.rpc_id(1, 'request_logout', GameManager.token)
 	get_node("/root/Lobby").login_to_character_list(false)
 
 func configure_character_list(character_list : Array):
