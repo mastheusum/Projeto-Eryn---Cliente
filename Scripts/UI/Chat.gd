@@ -1,8 +1,8 @@
 extends Control
 
-onready var edit_message = get_node("ScrollContainer/VBoxContainer/HBoxContainer/EditMessage")
-onready var send_message = get_node("ScrollContainer/VBoxContainer/HBoxContainer/SendMessage")
-onready var message_log = get_node("ScrollContainer/VBoxContainer/RichTextLabel")
+onready var edit_message = get_node("VBoxContainer/HBoxContainer/EditMessage")
+onready var send_message = get_node("VBoxContainer/HBoxContainer/SendMessage")
+onready var message_log = get_node("VBoxContainer/RichTextLabel")
 
 func _ready():
 	pass

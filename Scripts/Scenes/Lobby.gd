@@ -9,19 +9,19 @@ func _ready():
 
 # SIGNALS
 func _connection_ok():
-	$"CanvasLayer/Control/Control Connect Server".visible = false
-	$"CanvasLayer/Control/Control Login".visible = true
+	$"CanvasLayer/Control/Control Connect Server".hide()
+	$"CanvasLayer/Control/Control Login".show()
 
 func _connection_fail():
-	$"CanvasLayer/Control/Control Connect Server".visible = true
-	$"CanvasLayer/Control/Control Login".visible = false
+	$"CanvasLayer/Control/Control Connect Server".show()
+	$"CanvasLayer/Control/Control Login".hide()
 
 func _server_disconnected():
-	$"CanvasLayer/Control/Control Connect Server".visible = true
-	$"CanvasLayer/Control/Control Login".visible = false
-	$"CanvasLayer/Control/Control Create New Account".visible = false
-	$"CanvasLayer/Control/Control Character List".visible = false
-	$"CanvasLayer/Control/Control Create New Character".visible = false
+	$"CanvasLayer/Control/Control Connect Server".show()
+	$"CanvasLayer/Control/Control Login".hide()
+	$"CanvasLayer/Control/Control Create New Account".hide()
+	$"CanvasLayer/Control/Control Character List".hide()
+	$"CanvasLayer/Control/Control Create New Character".hide()
 
 # Control Connect Server
 func _on_Start_Connection_pressed():
@@ -50,7 +50,7 @@ func character_list_to_create_character(go : bool):
 
 func lobby_to_game(go : bool):
 	if go:
-		$CanvasLayer/Control.visible = false
+		$CanvasLayer/Control.hide()
 	else:
-		$CanvasLayer/Control.visible = true
+		$CanvasLayer/Control.show()
 		

@@ -1,0 +1,63 @@
+[gd_resource type="AnimationNodeStateMachine" load_steps=13 format=2]
+
+[sub_resource type="AnimationNodeAnimation" id=137]
+animation = "IDLE Left"
+
+[sub_resource type="AnimationNodeAnimation" id=138]
+animation = "IDLE Right"
+
+[sub_resource type="AnimationNodeAnimation" id=139]
+animation = "IDLE Down"
+
+[sub_resource type="AnimationNodeAnimation" id=140]
+animation = "IDLE Up"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=133]
+blend_point_0/node = SubResource( 137 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 138 )
+blend_point_1/pos = Vector2( 1, 0 )
+blend_point_2/node = SubResource( 139 )
+blend_point_2/pos = Vector2( 0, 1 )
+blend_point_3/node = SubResource( 140 )
+blend_point_3/pos = Vector2( 0, -1 )
+snap = Vector2( 0.5, 0.5 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id=141]
+animation = "Walk Left"
+
+[sub_resource type="AnimationNodeAnimation" id=143]
+animation = "Walk Down"
+
+[sub_resource type="AnimationNodeAnimation" id=144]
+animation = "Walk Up"
+
+[sub_resource type="AnimationNodeAnimation" id=145]
+animation = "Walk Right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=134]
+blend_point_0/node = SubResource( 141 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 143 )
+blend_point_1/pos = Vector2( 0, 1 )
+blend_point_2/node = SubResource( 144 )
+blend_point_2/pos = Vector2( 0, -1 )
+blend_point_3/node = SubResource( 145 )
+blend_point_3/pos = Vector2( 1, 0 )
+snap = Vector2( 0.5, 0.5 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=135]
+advance_condition = "IsWalking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=136]
+advance_condition = "IsStoped"
+
+[resource]
+states/IDLE/node = SubResource( 133 )
+states/IDLE/position = Vector2( 367, 61 )
+states/WALK/node = SubResource( 134 )
+states/WALK/position = Vector2( 590, 61 )
+transitions = [ "IDLE", "WALK", SubResource( 135 ), "WALK", "IDLE", SubResource( 136 ) ]
+start_node = "IDLE"

@@ -6,6 +6,8 @@ func _ready():
 	$HUD/LifeBar.value = life
 	$HUD/ManaBar.max_value = max_mana
 	$HUD/ManaBar.value = mana
+	
+	$AnimatedSprite.frames = load("res://Resources/Animations/"+str(sprite_index)+".tres")
 
 func _on_TargetArea_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:

@@ -1,19 +1,29 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/UI/Instantiable/MessageAlert.gd" type="Script" id=1]
+[ext_resource path="res://Resources/Fonts/IBM_Plex_Mono/DynamicFonts/Normal.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Resources/Fonts/IBM_Plex_Mono/DynamicFonts/BoldItalic.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Resources/Fonts/IBM_Plex_Mono/DynamicFonts/Italic.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Resources/Fonts/IBM_Plex_Mono/DynamicFonts/Bold.tres" type="DynamicFont" id=5]
 
 [node name="MessageAlert" type="Node2D"]
 z_index = 120
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_group_": true
+"_edit_group_": true,
+"_editor_description_": ""
 }
 
 [node name="log" type="RichTextLabel" parent="."]
 margin_left = -100.0
+margin_top = -50.0
 margin_right = 100.0
-margin_bottom = 20.0
+margin_bottom = -20.0
 rect_min_size = Vector2( 200, 30 )
+custom_fonts/bold_italics_font = ExtResource( 3 )
+custom_fonts/italics_font = ExtResource( 4 )
+custom_fonts/bold_font = ExtResource( 5 )
+custom_fonts/normal_font = ExtResource( 2 )
 bbcode_enabled = true
 fit_content_height = true
 __meta__ = {

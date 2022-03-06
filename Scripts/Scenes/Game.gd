@@ -11,16 +11,18 @@ func add_character_from_game(gateway_id : int, character : Dictionary):
 	if gateway_id == get_tree().get_network_unique_id():
 		player = character_node.instance()
 		player.experience = character['experience']
-		GameManager.in_game = true
-		GameManager.my_character_id = str( gateway_id )
+		SessionManager.signed_in = true
+		GameManager.my_character = player
 		get_node('/root/Lobby').lobby_to_game(true)
 	else:
 		player = character_proxy_node.instance()
 	
 	player.name = str(gateway_id)
+	print(character)
 	player.set_network_master(gateway_id)
 	player.id = character['id']
 	player.creature_name = character['name']
+	player.sprite_index = character['skin']
 	player.global_position = Vector2(character['global_position_x'],character['global_position_y'])
 	player.max_life = character['max_life']
 	player.life = character['life']

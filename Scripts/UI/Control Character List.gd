@@ -6,19 +6,20 @@ var button_group = preload("res://Config/CharSelectionGroup.tres")
 func _on_visibility_changed():
 	for child in $ScrollContainer/VBoxContainer.get_children():
 		child.queue_free()
+	ConnectionManager.rpc_id(1, 'request_character_list', SessionManager.token)
 
 func _on_SelectCharacterButton_pressed():
 	var btnGroup : ButtonGroup = $ScrollContainer/VBoxContainer.get_child(0).group
 	var btnSelected = btnGroup.get_pressed_button() as CharacterListButton
 	var character_id = btnSelected.character_id
 	
-	ConnectionManager.rpc_id(1, 'request_sign_in_character', GameManager.token, character_id)
+	ConnectionManager.rpc_id(1, 'request_sign_in_character', SessionManager.token, character_id)
 
 func _on_NewCharacterButton_pressed():
 	get_node("/root/Lobby").character_list_to_create_character(true)
 
 func _on_LogoutButton_pressed():
-	ConnectionManager.rpc_id(1, 'request_logout', GameManager.token)
+	ConnectionManager.rpc_id(1, 'request_logout', SessionManager.token)
 	get_node("/root/Lobby").login_to_character_list(false)
 
 func configure_character_list(character_list : Array):

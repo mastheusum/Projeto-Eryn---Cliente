@@ -56,6 +56,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
+SessionManager="*res://Scripts/Managers/SessionManager.gd"
 ConnectionManager="*res://Scripts/Managers/ConnectionManager.gd"
 GameManager="*res://Scripts/Managers/GameManager.gd"
 

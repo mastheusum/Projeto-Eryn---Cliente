@@ -4,6 +4,7 @@ class_name Creature
 
 var id : int
 var creature_name : String
+var sprite_index : int
 
 var _direction : Vector2 = Vector2.ZERO
 var _move_speed : int = 200
@@ -14,5 +15,5 @@ func _animate(dir=Vector2.DOWN, is_walking=false):
 	$AnimationTree['parameters/conditions/IsWalking'] = is_walking
 	if is_walking:
 		$AnimationTree['parameters/IDLE/blend_position'] = dir
-		$AnimationTree['parameters/Walk/blend_position'] = dir
+		$AnimationTree['parameters/WALK/blend_position'] = dir
 

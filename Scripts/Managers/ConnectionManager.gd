@@ -51,12 +51,12 @@ remote func request_sign_out_character(token : String):
 # RESPONSES
 remote func response_login(account_id : int, token : String):
 	if account_id > 0 and token != "":
-		GameManager.set_account_logged(account_id, token)
+		SessionManager.set_account_logged(account_id, token)
 	else:
 		get_node('/root/Lobby/CanvasLayer/Control/Control Login').configure_panel_wait("Invalid Credentials", 2.0)
 
 remote func response_logout():
-	GameManager.set_account_logged(-1, "")
+	SessionManager.set_account_logged(-1, "")
 
 remote func response_new_account( error : String ):
 	get_node('/root/Lobby/CanvasLayer/Control/Control Create New Account').configure_panel_wait(error)
@@ -84,19 +84,19 @@ remote func response_sign_out(character_list : Array):
 # ---------------------
 
 remote func set_charater_position(global_pos, direction):
-	if GameManager.in_game:
+	if SessionManager.signed_in:
 		var id = get_tree().get_rpc_sender_id()
 		GameManager.set_character_position(id, global_pos, direction)
 
 remotesync func get_message(message : String):
-	if GameManager.in_game:
+	if SessionManager.signed_in:
 		var gateway_id = get_tree().get_rpc_sender_id()
 		GameManager.get_message(gateway_id, message)
 
 # This function is called when player receive a damage
 # then this damage is send to al another players connecteds
 remotesync func get_status_alert(message : String, type : int):
-	if GameManager.in_game:
+	if SessionManager.signed_in:
 		var gateway_id = get_tree().get_rpc_sender_id()
 		GameManager.get_status_alert(gateway_id, message, type)
 
@@ -106,7 +106,7 @@ remote func attack_character(power : int, type : int):
 
 # ussed to update CharacterProxyes's life and mana 
 remote func update_status(gateway_id : int, life : int, mana : int):
-	if GameManager.in_game:
+	if SessionManager.signed_in:
 		if gateway_id != get_tree().get_network_unique_id():
 			GameManager.get_character(gateway_id).update_status(life, mana)
 

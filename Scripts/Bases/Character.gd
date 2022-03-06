@@ -26,13 +26,15 @@ func calculate_current_level():
 		gain_experience( -1000 )
 
 func _ready():
-	$CanvasLayer/Sign_out.connect("pressed", GameManager, "exit_game")
+	$CanvasLayer/Sign_out.connect("pressed", SessionManager, "exit_game")
 	
 	$CanvasLayer/Status/CharacterName.text = creature_name
 	$CanvasLayer/Status/LifeBar.max_value = max_life
 	$CanvasLayer/Status/LifeBar.value = life
 	$CanvasLayer/Status/ManaBar.max_value = max_mana
 	$CanvasLayer/Status/ManaBar.value = mana
+	
+	$AnimatedSprite.frames = load("res://Resources/Animations/"+str(sprite_index)+".tres")
 	
 	# Player need recovery your status based in time
 	life_recovery_rate = max_life / full_recover_time
