@@ -75,13 +75,19 @@ remote func response_sign_in(character_list : Dictionary):
 # This funcion will receive a list of geteways that will need destroy
 # if the in the list have your own gateway then this client are leaving the game
 remote func response_sign_out(character_list : Array):
-	if character_list.has( str( get_tree().get_network_unique_id() ) ):
-		GameManager.exit_game()
+	print( get_tree().get_network_unique_id() )
+	print( character_list )
+	if character_list.has( get_tree().get_network_unique_id() ):
+		print(1)
+		SessionManager.exit_game()
 	else:
+		print(2)
 		for gateway in character_list:
 			GameManager.destroy_character( int(gateway) )
 
-# ---------------------
+# ----
+# Game Play
+# ----
 
 remote func set_charater_position(global_pos, direction):
 	if SessionManager.signed_in:
@@ -102,7 +108,13 @@ remotesync func get_status_alert(message : String, type : int):
 
 # used by player to receive damage by other players
 remote func attack_character(power : int, type : int):
-	GameManager.get_character(get_tree().get_network_unique_id()).receive_damage(power, type)
+	var gateway_id = get_tree().get_rpc_sender_id()
+#	GameManager.my_character.set_aggressor_list(gateway_id)
+	ConnectionManager.rpc_id(1, 'set_aggressor_list', gateway_id)
+	GameManager.my_character.receive_damage(power, type)
+
+remote func set_aggressor_list(gateway_id : int):
+	pass
 
 # ussed to update CharacterProxyes's life and mana 
 remote func update_status(gateway_id : int, life : int, mana : int):
@@ -110,3 +122,10 @@ remote func update_status(gateway_id : int, life : int, mana : int):
 		if gateway_id != get_tree().get_network_unique_id():
 			GameManager.get_character(gateway_id).update_status(life, mana)
 
+remote func update_level(gateway_id : int, experience : int, level : int):
+	if SessionManager.signed_in:
+		if gateway_id == get_tree().get_network_unique_id():
+			GameManager.my_character.update_level(level)
+			GameManager.my_character.update_experience(experience)
+		else:
+			GameManager.get_character(gateway_id).update_level(level)

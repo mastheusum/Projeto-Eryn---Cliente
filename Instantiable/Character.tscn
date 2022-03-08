@@ -1,8 +1,13 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Scripts/Bases/Character.gd" type="Script" id=1]
 [ext_resource path="res://Resources/StateMachine/Animation.tres" type="AnimationNodeStateMachine" id=2]
 [ext_resource path="res://Resources/Animations/0.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://Sprites/UI/hp_bar 2.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/UI/hud_bg_without_custom_meter.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/UI/mp_bar 2.png" type="Texture" id=6]
+[ext_resource path="res://Resources/Fonts/IBM_Plex_Mono/DynamicFonts/Normal.tres" type="DynamicFont" id=7]
+[ext_resource path="res://Resources/Fonts/IBM_Plex_Mono/IBMPlexMono-Bold.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://Instantiable/UI/Chat.tscn" type="PackedScene" id=10]
 
 [sub_resource type="CapsuleShape2D" id=148]
@@ -357,8 +362,12 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="DynamicFont" id=149]
+size = 32
+font_data = ExtResource( 8 )
+
 [node name="Character" type="KinematicBody2D"]
-position = Vector2( 512, 304 )
+position = Vector2( 512, 300 )
 z_index = 2
 script = ExtResource( 1 )
 
@@ -459,6 +468,77 @@ custom_styles/fg = SubResource( 129 )
 custom_styles/bg = SubResource( 130 )
 value = 50.0
 percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="CanvasLayer/Status"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Status" type="TextureRect" parent="CanvasLayer/Status/Control"]
+margin_left = -404.0
+margin_top = -200.0
+margin_right = -89.0
+margin_bottom = -110.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LifeBar" type="TextureProgress" parent="CanvasLayer/Status/Control"]
+margin_left = -323.0
+margin_top = -176.0
+margin_right = -147.0
+margin_bottom = -162.0
+value = 50.0
+texture_under = ExtResource( 4 )
+texture_progress = ExtResource( 4 )
+tint_under = Color( 0.333333, 0.588235, 0.376471, 1 )
+tint_progress = Color( 0, 1, 0.180392, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ManaBar" type="TextureProgress" parent="CanvasLayer/Status/Control"]
+margin_left = -323.0
+margin_top = -162.0
+margin_right = -154.0
+margin_bottom = -155.0
+value = 50.0
+texture_under = ExtResource( 6 )
+texture_progress = ExtResource( 6 )
+tint_under = Color( 0.313726, 0.564706, 0.517647, 1 )
+tint_progress = Color( 0, 1, 0.811765, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ExperienceBar" type="TextureProgress" parent="CanvasLayer/Status/Control"]
+margin_left = -324.0
+margin_top = -152.0
+margin_right = -155.0
+margin_bottom = -145.0
+value = 5.0
+texture_progress = ExtResource( 6 )
+tint_progress = Color( 1, 1, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Status/Control"]
+margin_left = -413.0
+margin_top = -180.0
+margin_right = -311.0
+margin_bottom = -132.0
+custom_fonts/bold_font = SubResource( 149 )
+custom_fonts/normal_font = ExtResource( 7 )
+bbcode_enabled = true
+bbcode_text = "[center][b]100"
+text = "100"
 __meta__ = {
 "_edit_use_anchors_": false
 }

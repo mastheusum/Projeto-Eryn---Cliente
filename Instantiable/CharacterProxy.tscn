@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/Bases/CharacterProxy.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Animations/0.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://Resources/StateMachine/Animation.tres" type="AnimationNodeStateMachine" id=3]
-[ext_resource path="res://Sprites/semi circulo.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/UI/semi circulo.png" type="Texture" id=10]
 
 [sub_resource type="Animation" id=74]
 resource_name = "IDLE Down"

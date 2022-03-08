@@ -18,7 +18,6 @@ func add_character_from_game(gateway_id : int, character : Dictionary):
 		player = character_proxy_node.instance()
 	
 	player.name = str(gateway_id)
-	print(character)
 	player.set_network_master(gateway_id)
 	player.id = character['id']
 	player.creature_name = character['name']

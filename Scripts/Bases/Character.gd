@@ -11,28 +11,20 @@ var mana_recovery_rate : float = 0
 
 var target_gateway_id : int = -1
 
-func send_message(message : String):
-	pass
-
-func gain_experience(value : int):
-	experience += value
-	calculate_current_level()
-	pass
-
-# based on character's experience calculates his level
-func calculate_current_level():
-	if experience >= 1000:
-		level += 1
-		gain_experience( -1000 )
-
 func _ready():
 	$CanvasLayer/Sign_out.connect("pressed", SessionManager, "exit_game")
 	
 	$CanvasLayer/Status/CharacterName.text = creature_name
 	$CanvasLayer/Status/LifeBar.max_value = max_life
 	$CanvasLayer/Status/LifeBar.value = life
+	$CanvasLayer/Status/Control/LifeBar.max_value = max_life
+	$CanvasLayer/Status/Control/LifeBar.value = life
 	$CanvasLayer/Status/ManaBar.max_value = max_mana
 	$CanvasLayer/Status/ManaBar.value = mana
+	$CanvasLayer/Status/Control/ManaBar.max_value = max_mana
+	$CanvasLayer/Status/Control/ManaBar.value = mana
+	update_level(self.level)
+	update_experience(self.experience)
 	
 	$AnimatedSprite.frames = load("res://Resources/Animations/"+str(sprite_index)+".tres")
 	
@@ -99,6 +91,15 @@ func _physics_process(delta):
 	move_and_collide(_direction.normalized() * _move_speed * delta)
 	ConnectionManager.rpc('set_charater_position', global_position, _direction)
 
+func update_experience(value : int):
+	self.experience = value
+	$CanvasLayer/Status/Control/ExperienceBar.value = experience
+	$CanvasLayer/Status/Control/ExperienceBar.max_value = level * 100
+
+func update_level(value : int):
+	self.level = value
+	$CanvasLayer/Status/Control/RichTextLabel.bbcode_text = "[center][b]" + str(level)
+
 func start_attack(gateway_id : int):
 	target_gateway_id = gateway_id
 	if not $AttackInterval.time_left > 0:
@@ -106,11 +107,12 @@ func start_attack(gateway_id : int):
 
 # type will be implemented
 func receive_damage(value : int, type : int):
-	var max_damage = value if value < life else life
+	var max_damage = 1 + ( value if value < life else life )
 	randomize()
 	var damage = (randi() % max_damage)
 	life -= damage
 	$CanvasLayer/Status/LifeBar.value = life
+	$CanvasLayer/Status/Control/LifeBar.value = life
 	ConnectionManager.rpc('update_status', get_tree().get_network_unique_id(), life, mana)
 	ConnectionManager.rpc('get_status_alert', str(damage), 1)
 
@@ -120,6 +122,7 @@ func _on_RecoveryLife_timeout():
 	else:
 		life = max_life
 	$CanvasLayer/Status/LifeBar.value = life
+	$CanvasLayer/Status/Control/LifeBar.value = life
 	ConnectionManager.rpc('update_status', get_tree().get_network_unique_id(), life, mana)
 
 func _on_RecoveryMana_timeout():
@@ -128,6 +131,7 @@ func _on_RecoveryMana_timeout():
 	else:
 		mana = max_mana
 	$CanvasLayer/Status/ManaBar.value = mana
+	$CanvasLayer/Status/Control/ManaBar.value = mana
 	ConnectionManager.rpc('update_status', get_tree().get_network_unique_id(), life, mana)
 
 func _on_AttackInterval_timeout():
@@ -135,3 +139,4 @@ func _on_AttackInterval_timeout():
 		if global_position.distance_to( GameManager.get_character(target_gateway_id).global_position ) <= attack_range:
 			ConnectionManager.rpc_id(target_gateway_id, 'attack_character', 10, 1)
 		$AttackInterval.start(1.5)
+

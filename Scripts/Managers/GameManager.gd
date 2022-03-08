@@ -19,6 +19,8 @@ func create_character(character_list : Dictionary):
 
 func destroy_character(gateway_id : int):
 	if SessionManager.signed_in:
+		if (my_character as Character).target_gateway_id == gateway_id:
+			set_player_target( -1 )
 		get_node('/root/Game').remove_character_from_game(gateway_id)
 
 func set_character_position(gateway_id : int, global_pos : Vector2, direction : Vector2):
