@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Panel",
+"class": "BagSlot",
+"language": "GDScript",
+"path": "res://Scripts/UI/Instantiable/BagSlot.gd"
+}, {
 "base": "PlayableCharacter",
 "class": "Character",
 "language": "GDScript",
@@ -24,20 +29,25 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/UI/Instantiable/CharacterListButton.gd"
 }, {
-"base": "Item",
-"class": "Consumable",
+"base": "PlayableCharacter",
+"class": "CharacterProxy",
 "language": "GDScript",
-"path": "res://Scripts/Bases/Consumable.gd"
+"path": "res://Scripts/Bases/CharacterProxy.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Creature",
 "language": "GDScript",
 "path": "res://Scripts/Bases/Creature.gd"
 }, {
-"base": "Item",
-"class": "Defensive",
+"base": "Panel",
+"class": "EquipmentSlot",
 "language": "GDScript",
-"path": "res://Scripts/Bases/Defensive.gd"
+"path": "res://Scripts/UI/Instantiable/EquipmentSlot.gd"
+}, {
+"base": "Control",
+"class": "Inventory",
+"language": "GDScript",
+"path": "res://Scripts/UI/Instantiable/Inventory.gd"
 }, {
 "base": "TextureRect",
 "class": "Item",
@@ -49,26 +59,22 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Bases/NoPlayableCharacter.gd"
 }, {
-"base": "Item",
-"class": "Offensive",
-"language": "GDScript",
-"path": "res://Scripts/Bases/Offensive.gd"
-}, {
 "base": "Creature",
 "class": "PlayableCharacter",
 "language": "GDScript",
 "path": "res://Scripts/Bases/PlayableCharacter.gd"
 } ]
 _global_script_class_icons={
+"BagSlot": "",
 "Character": "",
 "CharacterBase": "",
 "CharacterListButton": "",
-"Consumable": "",
+"CharacterProxy": "",
 "Creature": "",
-"Defensive": "",
+"EquipmentSlot": "",
+"Inventory": "",
 "Item": "",
 "NoPlayableCharacter": "",
-"Offensive": "",
 "PlayableCharacter": ""
 }
 
@@ -88,6 +94,30 @@ GameManager="*res://Scripts/Managers/GameManager.gd"
 
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
+
+[importer_defaults]
+
+texture={
+"compress/bptc_ldr": 0,
+"compress/hdr_mode": 0,
+"compress/lossy_quality": 0.7,
+"compress/mode": 0,
+"compress/normal_map": 0,
+"detect_3d": true,
+"flags/anisotropic": false,
+"flags/filter": false,
+"flags/mipmaps": false,
+"flags/repeat": 0,
+"flags/srgb": 2,
+"process/HDR_as_SRGB": false,
+"process/fix_alpha_border": true,
+"process/invert_color": false,
+"process/normal_map_invert_y": false,
+"process/premult_alpha": false,
+"size_limit": 0,
+"stream": false,
+"svg/scale": 1.0
+}
 
 [input]
 

@@ -1,0 +1,750 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scripts/UI/Instantiable/Inventory.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/UI/Instantiable/EquipmentSlot.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/UI/Instantiable/BagSlot.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/UI/Instantiable/Bag.gd" type="Script" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+
+[sub_resource type="StyleBoxFlat" id=2]
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.254902, 0.760784, 0.984314, 1 )
+
+[node name="Inventory" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -832.0
+margin_bottom = -176.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Equipments" type="Control" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 184.0
+margin_bottom = 198.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="Equipments"]
+margin_right = 176.0
+margin_bottom = 190.0
+rect_min_size = Vector2( 176, 190 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="Weapon1" type="Panel" parent="Equipments/Panel"]
+margin_left = 24.0
+margin_top = 56.0
+margin_right = 56.0
+margin_bottom = 88.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+accepted_item_type = 4
+
+[node name="Weapon2" type="Panel" parent="Equipments/Panel"]
+margin_left = 120.0
+margin_top = 56.0
+margin_right = 152.0
+margin_bottom = 88.0
+script = ExtResource( 2 )
+accepted_item_type = 4
+
+[node name="Helmet" type="Panel" parent="Equipments/Panel"]
+margin_left = 72.0
+margin_top = 8.0
+margin_right = 104.0
+margin_bottom = 40.0
+script = ExtResource( 2 )
+
+[node name="Armor" type="Panel" parent="Equipments/Panel"]
+margin_left = 72.0
+margin_top = 48.0
+margin_right = 104.0
+margin_bottom = 80.0
+script = ExtResource( 2 )
+accepted_item_type = 1
+
+[node name="Legs" type="Panel" parent="Equipments/Panel"]
+margin_left = 72.0
+margin_top = 88.0
+margin_right = 104.0
+margin_bottom = 120.0
+script = ExtResource( 2 )
+accepted_item_type = 2
+
+[node name="Boots" type="Panel" parent="Equipments/Panel"]
+margin_left = 72.0
+margin_top = 128.0
+margin_right = 104.0
+margin_bottom = 160.0
+script = ExtResource( 2 )
+accepted_item_type = 3
+
+[node name="Ring1" type="Panel" parent="Equipments/Panel"]
+margin_left = 24.0
+margin_top = 112.0
+margin_right = 56.0
+margin_bottom = 144.0
+script = ExtResource( 2 )
+accepted_item_type = 5
+
+[node name="Ring2" type="Panel" parent="Equipments/Panel"]
+margin_left = 120.0
+margin_top = 112.0
+margin_right = 152.0
+margin_bottom = 144.0
+script = ExtResource( 2 )
+accepted_item_type = 5
+
+[node name="Bag" type="Control" parent="."]
+margin_left = 8.0
+margin_top = 224.0
+margin_right = 184.0
+margin_bottom = 416.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="Bag"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 176, 192 )
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Bag"]
+margin_right = 12.0
+margin_bottom = 12.0
+rect_min_size = Vector2( 184, 192 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="Bag/ScrollContainer"]
+margin_right = 176.0
+margin_bottom = 176.0
+rect_min_size = Vector2( 160, 0 )
+columns = 5
+
+[node name="Slot1" type="Panel" parent="Bag/ScrollContainer/GridContainer"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="Bag/ScrollContainer/GridContainer/Slot1"]
+visible = false
+margin_top = 16.0
+margin_right = 32.0
+margin_bottom = 32.0
+mouse_filter = 1
+text = "999"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot2" type="Panel" parent="Bag/ScrollContainer/GridContainer"]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Bag/ScrollContainer/GridContainer/Slot2"]
+visible = false
+margin_top = 16.0
+margin_right = 32.0
+margin_bottom = 32.0
+mouse_filter = 1
+text = "999"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot3" type="Panel" parent="Bag/ScrollContainer/GridContainer"]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Bag/ScrollContainer/GridContainer/Slot3"]
+visible = false
+margin_top = 16.0
+margin_right = 32.0
+margin_bottom = 32.0
+mouse_filter = 1
+text = "999"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot4" type="Panel" parent="Bag/ScrollContainer/GridContainer"]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Bag/ScrollContainer/GridContainer/Slot4"]
+visible = false
+margin_top = 16.0
+margin_right = 32.0
+margin_bottom = 32.0
+mouse_filter = 1
+text = "999"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot5" type="Panel" parent="Bag/ScrollContainer/GridContainer"]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Bag/ScrollContainer/GridContainer/Slot5"]
+visible = false
+margin_top = 16.0
+margin_right = 32.0
+margin_bottom = 32.0
+mouse_filter = 1
+text = "999"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot6" type="Panel" parent="Bag/ScrollContainer/GridContainer"]
+margin_top = 36.0
+margin_right = 32.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Bag/ScrollContainer/GridContainer/Slot6"]
+visible = false
+margin_top = 16.0
+margin_right = 32.0
+margin_bottom = 32.0
+mouse_filter = 1
+text = "999"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot7" type="Panel" parent="Bag/ScrollContainer/GridContainer"]
+margin_left = 36.0
+margin_top = 36.0
+margin_right = 68.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Bag/ScrollContainer/GridContainer/Slot7"]
+visible = false
+margin_top = 16.0
+margin_right = 32.0
+margin_bottom = 32.0
+mouse_filter = 1
+text = "999"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot8" type="Panel" parent="Bag/ScrollContainer/GridContainer"]
+margin_left = 72.0
+margin_top = 36.0
+margin_right = 104.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Bag/ScrollContainer/GridContainer/Slot8"]
+visible = false
+margin_top = 16.0
+margin_right = 32.0
+margin_bottom = 32.0
+mouse_filter = 1
+text = "999"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot9" type="Panel" parent="Bag/ScrollContainer/GridContainer"]
+margin_left = 108.0
+margin_top = 36.0
+margin_right = 140.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Bag/ScrollContainer/GridContainer/Slot9"]
+visible = false
+margin_top = 16.0
+margin_right = 32.0
+margin_bottom = 32.0
+mouse_filter = 1
+text = "999"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot10" type="Panel" parent="Bag/ScrollContainer/GridContainer"]
+margin_left = 144.0
+margin_top = 36.0
+margin_right = 176.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Bag/ScrollContainer/GridContainer/Slot10"]
+visible = false
+margin_top = 16.0
+margin_right = 32.0
+margin_bottom = 32.0
+mouse_filter = 1
+text = "999"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot11" type="Panel" parent="Bag/ScrollContainer/GridContainer"]
+margin_top = 72.0
+margin_right = 32.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Bag/ScrollContainer/GridContainer/Slot11"]
+visible = false
+margin_top = 16.0
+margin_right = 32.0
+margin_bottom = 32.0
+mouse_filter = 1
+text = "999"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot12" type="Panel" parent="Bag/ScrollContainer/GridContainer"]
+margin_left = 36.0
+margin_top = 72.0
+margin_right = 68.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Bag/ScrollContainer/GridContainer/Slot12"]
+visible = false
+margin_top = 16.0
+margin_right = 32.0
+margin_bottom = 32.0
+mouse_filter = 1
+text = "999"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot13" type="Panel" parent="Bag/ScrollContainer/GridContainer"]
+margin_left = 72.0
+margin_top = 72.0
+margin_right = 104.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Bag/ScrollContainer/GridContainer/Slot13"]
+visible = false
+margin_top = 16.0
+margin_right = 32.0
+margin_bottom = 32.0
+mouse_filter = 1
+text = "999"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot14" type="Panel" parent="Bag/ScrollContainer/GridContainer"]
+margin_left = 108.0
+margin_top = 72.0
+margin_right = 140.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Bag/ScrollContainer/GridContainer/Slot14"]
+visible = false
+margin_top = 16.0
+margin_right = 32.0
+margin_bottom = 32.0
+mouse_filter = 1
+text = "999"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot15" type="Panel" parent="Bag/ScrollContainer/GridContainer"]
+margin_left = 144.0
+margin_top = 72.0
+margin_right = 176.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Bag/ScrollContainer/GridContainer/Slot15"]
+visible = false
+margin_top = 16.0
+margin_right = 32.0
+margin_bottom = 32.0
+mouse_filter = 1
+text = "999"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot16" type="Panel" parent="Bag/ScrollContainer/GridContainer"]
+margin_top = 108.0
+margin_right = 32.0
+margin_bottom = 140.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Bag/ScrollContainer/GridContainer/Slot16"]
+visible = false
+margin_top = 16.0
+margin_right = 32.0
+margin_bottom = 32.0
+mouse_filter = 1
+text = "999"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot17" type="Panel" parent="Bag/ScrollContainer/GridContainer"]
+margin_left = 36.0
+margin_top = 108.0
+margin_right = 68.0
+margin_bottom = 140.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Bag/ScrollContainer/GridContainer/Slot17"]
+visible = false
+margin_top = 16.0
+margin_right = 32.0
+margin_bottom = 32.0
+mouse_filter = 1
+text = "999"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot18" type="Panel" parent="Bag/ScrollContainer/GridContainer"]
+margin_left = 72.0
+margin_top = 108.0
+margin_right = 104.0
+margin_bottom = 140.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Bag/ScrollContainer/GridContainer/Slot18"]
+visible = false
+margin_top = 16.0
+margin_right = 32.0
+margin_bottom = 32.0
+mouse_filter = 1
+text = "999"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot19" type="Panel" parent="Bag/ScrollContainer/GridContainer"]
+margin_left = 108.0
+margin_top = 108.0
+margin_right = 140.0
+margin_bottom = 140.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Bag/ScrollContainer/GridContainer/Slot19"]
+visible = false
+margin_top = 16.0
+margin_right = 32.0
+margin_bottom = 32.0
+mouse_filter = 1
+text = "999"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot20" type="Panel" parent="Bag/ScrollContainer/GridContainer"]
+margin_left = 144.0
+margin_top = 108.0
+margin_right = 176.0
+margin_bottom = 140.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Bag/ScrollContainer/GridContainer/Slot20"]
+visible = false
+margin_top = 16.0
+margin_right = 32.0
+margin_bottom = 32.0
+mouse_filter = 1
+text = "999"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot21" type="Panel" parent="Bag/ScrollContainer/GridContainer"]
+margin_top = 144.0
+margin_right = 32.0
+margin_bottom = 176.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Bag/ScrollContainer/GridContainer/Slot21"]
+visible = false
+margin_top = 16.0
+margin_right = 32.0
+margin_bottom = 32.0
+mouse_filter = 1
+text = "999"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot22" type="Panel" parent="Bag/ScrollContainer/GridContainer"]
+margin_left = 36.0
+margin_top = 144.0
+margin_right = 68.0
+margin_bottom = 176.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Bag/ScrollContainer/GridContainer/Slot22"]
+visible = false
+margin_top = 16.0
+margin_right = 32.0
+margin_bottom = 32.0
+mouse_filter = 1
+text = "999"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot23" type="Panel" parent="Bag/ScrollContainer/GridContainer"]
+margin_left = 72.0
+margin_top = 144.0
+margin_right = 104.0
+margin_bottom = 176.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Bag/ScrollContainer/GridContainer/Slot23"]
+visible = false
+margin_top = 16.0
+margin_right = 32.0
+margin_bottom = 32.0
+mouse_filter = 1
+text = "999"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot24" type="Panel" parent="Bag/ScrollContainer/GridContainer"]
+margin_left = 108.0
+margin_top = 144.0
+margin_right = 140.0
+margin_bottom = 176.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Bag/ScrollContainer/GridContainer/Slot24"]
+visible = false
+margin_top = 16.0
+margin_right = 32.0
+margin_bottom = 32.0
+mouse_filter = 1
+text = "999"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot25" type="Panel" parent="Bag/ScrollContainer/GridContainer"]
+margin_left = 144.0
+margin_top = 144.0
+margin_right = 176.0
+margin_bottom = 176.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Bag/ScrollContainer/GridContainer/Slot25"]
+visible = false
+margin_top = 16.0
+margin_right = 32.0
+margin_bottom = 32.0
+mouse_filter = 1
+text = "999"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}

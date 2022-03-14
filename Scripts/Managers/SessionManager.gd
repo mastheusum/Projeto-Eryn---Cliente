@@ -18,7 +18,7 @@ func logout():
 func exit_game():
 	signed_in = false
 	get_node('/root/Lobby').lobby_to_game(false)
-	get_node('/root/Game').remove_all()
+	get_node('/root/Harbor').remove_all()
 	
 	ConnectionManager.rpc_id(
 		1, 'request_sign_out_character', token

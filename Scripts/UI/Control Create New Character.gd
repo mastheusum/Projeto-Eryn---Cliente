@@ -1,16 +1,28 @@
 extends Control
 
+enum Jobs {
+	KNIGHT,
+	ARCHER,
+	SORCERER,
+	DRUID
+}
+
 var sprite_index : int = 0
 var sprite_list = [
-	preload("res://Sprites/Character/Villagers/Villager Male.png"),
-	preload("res://Sprites/Character/Villagers/Villager Female.png"),
+	preload("res://Sprites/Character/Pipoya/Male/Male 14-1.png"),
+	preload("res://Sprites/Character/Pipoya/Female/Female 17-1.png"),
 ]
+
+func _ready():
+#	print(Jobs)
+	pass
 
 func _on_visibility_changed():
 	$CharacterName.text = ''
 
 func _on_CreateCharacterButton_pressed():
 	var character_name : String = $CharacterName.text
+	var jobs_group = $Jobs/Archer.group
 	
 	var pool_string = character_name.split(' ')
 	character_name = pool_string.join(' ')
@@ -18,6 +30,7 @@ func _on_CreateCharacterButton_pressed():
 	var character = {}
 	character['name'] = character_name
 	character['skin'] = sprite_index
+	character['job'] = Jobs[jobs_group.get_pressed_button().name.to_upper()]
 	
 	config_panel_result("Please Wait", false)
 	

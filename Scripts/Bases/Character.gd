@@ -2,8 +2,17 @@ extends PlayableCharacter
 
 class_name Character
 
+enum Jobs {
+	KNIGHT,
+	ARCHER,
+	SORCERER,
+	DRUID
+}
+
 var account_id : int
 var experience : int
+var attribute_points : int # to distribute among attributes when leveling up
+var job : int # Type ENUM Jobs
 
 var full_recover_time : float = 750 # in secconds
 var life_recovery_rate : float = 0
@@ -11,24 +20,37 @@ var mana_recovery_rate : float = 0
 
 var target_gateway_id : int = -1
 
+var inventory = []
+
+var _helmet : Item = null
+var _armor : Item = null
+var _legs : Item = null
+var _boots : Item = null
+var _weapon1 : Item = null
+var _weapon2 : Item = null
+var _ring1 : Item = null
+var _ring2 : Item = null
+
+signal update_attribute()
+
 func _ready():
 	$CanvasLayer/Sign_out.connect("pressed", SessionManager, "exit_game")
 	
-	$CanvasLayer/Status/CharacterName.text = creature_name
+	$CanvasLayer/Status/CharacterName.bbcode_text = '[b][i]' + creature_name
 	$CanvasLayer/Status/LifeBar.max_value = max_life
 	$CanvasLayer/Status/LifeBar.value = life
-	$CanvasLayer/Status/Control/LifeBar.max_value = max_life
-	$CanvasLayer/Status/Control/LifeBar.value = life
 	$CanvasLayer/Status/ManaBar.max_value = max_mana
 	$CanvasLayer/Status/ManaBar.value = mana
-	$CanvasLayer/Status/Control/ManaBar.max_value = max_mana
-	$CanvasLayer/Status/Control/ManaBar.value = mana
-	update_level(self.level)
-	update_experience(self.experience)
+	
+	call_deferred( "set_attribute", "level", level )
+	call_deferred( "set_attribute", "experience", experience )
 	
 	$AnimatedSprite.frames = load("res://Resources/Animations/"+str(sprite_index)+".tres")
-	
-	# Player need recovery your status based in time
+	def_life_recovery()
+	def_mana_recovery()
+
+# Player need recovery your status based in time
+func def_life_recovery():
 	life_recovery_rate = max_life / full_recover_time
 	# if the recovery is too small then the time to recovery is bigger
 	if life_recovery_rate < 1.0:
@@ -39,8 +61,9 @@ func _ready():
 		life_recovery_rate *= 2
 		$RecoveryLife.start(2)
 	$RecoveryLife.autostart = true
-	
-	# the same logic applied in life recovery
+
+# the same logic applied in life recovery
+func def_mana_recovery():
 	mana_recovery_rate = max_mana / full_recover_time
 	if mana_recovery_rate < 1.0:
 		$RecoveryMana.start(1/mana_recovery_rate)
@@ -59,20 +82,14 @@ func _unhandled_input(event):
 #			get_parent().get_parent().get_node("Navigation2D/Line2D").points = _path
 			_path.remove(0)
 	elif event is InputEventKey:
-		if event.is_action_pressed("ui_up"):
-			_direction.y = - event.get_action_strength("ui_up")
-		elif event.is_action_pressed("ui_down"):
-			_direction.y = event.get_action_strength("ui_down")
-		elif event.is_action_released("ui_up") or event.is_action_released("ui_down"):
-			_direction.y = 0
-		if event.is_action_pressed("ui_left"):
-			_direction.x = - event.get_action_strength("ui_left")
-		elif event.is_action_pressed("ui_right"):
-			_direction.x = event.get_action_strength("ui_right")
-		elif event.is_action_released("ui_left") or event.is_action_released("ui_right"):
-			_direction.x = 0
-		if event.is_pressed() and event.scancode == KEY_SPACE:
-			print(global_position)
+		# Attribute Controle
+		if event.is_pressed() and event.scancode == KEY_C:
+			$CanvasLayer/Attributes.visible = not $CanvasLayer/Attributes.visible
+		# Movement
+		if event.is_action("ui_right") or event.is_action("ui_left"):
+			_direction.x = event.get_action_strength("ui_right") - event.get_action_strength("ui_left")
+		if event.is_action("ui_down") or event.is_action("ui_up"):
+			_direction.y = event.get_action_strength("ui_down") - event.get_action_strength("ui_up")
 		# if the player start a movement by keyboard then the path must be forgotten
 		if _direction != Vector2.ZERO:
 			_path = []
@@ -91,14 +108,51 @@ func _physics_process(delta):
 	move_and_collide(_direction.normalized() * _move_speed * delta)
 	ConnectionManager.rpc('set_charater_position', global_position, _direction)
 
-func update_experience(value : int):
-	self.experience = value
-	$CanvasLayer/Status/Control/ExperienceBar.value = experience
-	$CanvasLayer/Status/Control/ExperienceBar.max_value = level * 100
+func set_attribute(attribute : String, value : int):
+	var attribute_accessor : PoolStringArray = [
+		"strength",
+		"constitution",
+		"dexterity",
+		"agility",
+		"intelligence",
+		"willpower",
+		"perception",
+		"wisdom",
+		"life",
+		"mana",
+		"max_life",
+		"max_mana",
+		"experience",
+		"level",
+		"attribute_points"
+	]
+	if attribute in attribute_accessor:
+		set(attribute, value)
+		if attribute == 'life':
+			$CanvasLayer/Status/LifeBar.value = life
+		elif attribute == 'mana':
+			$CanvasLayer/Status/ManaBar.value = mana
+		elif attribute == 'level':
+			$CanvasLayer/Status/Level.bbcode_text = "[center][b]" + str(level)
+			$CanvasLayer/Status/ExperienceBar.min_value = pow(10 * (level - 1), 2)
+			$CanvasLayer/Status/ExperienceBar.max_value = 100 * (pow(level, 2) - pow(level - 1, 2))
+		elif attribute == 'experience':
+			$CanvasLayer/Status/ExperienceBar.value = experience
+		elif attribute == "max_life":
+			def_life_recovery()
+			$CanvasLayer/Status/LifeBar.max_value = max_life
+		elif attribute == "max_mana":
+			def_mana_recovery()
+			$CanvasLayer/Status/ManaBar.max_value = max_mana
+		emit_signal("update_attribute")
 
-func update_level(value : int):
-	self.level = value
-	$CanvasLayer/Status/Control/RichTextLabel.bbcode_text = "[center][b]" + str(level)
+func set_equipment(equipment_name : String, item : Item = null):
+	set(equipment_name, item)
+	ConnectionManager.rpc_id(1, "set_character_equipment", equipment_name, item.as_dict())
+
+func set_inventory(item_list : Array):
+	inventory = item_list
+	ConnectionManager.rpc_id(1, "set_character_inventory", inventory)
 
 func start_attack(gateway_id : int):
 	target_gateway_id = gateway_id
@@ -111,9 +165,9 @@ func receive_damage(value : int, type : int):
 	randomize()
 	var damage = (randi() % max_damage)
 	life -= damage
+	
 	$CanvasLayer/Status/LifeBar.value = life
-	$CanvasLayer/Status/Control/LifeBar.value = life
-	ConnectionManager.rpc('update_status', get_tree().get_network_unique_id(), life, mana)
+	ConnectionManager.rpc('update_status', get_tree().get_network_unique_id(), "life", life)
 	ConnectionManager.rpc('get_status_alert', str(damage), 1)
 
 func _on_RecoveryLife_timeout():
@@ -121,22 +175,23 @@ func _on_RecoveryLife_timeout():
 		life += int(life_recovery_rate)
 	else:
 		life = max_life
+	
 	$CanvasLayer/Status/LifeBar.value = life
-	$CanvasLayer/Status/Control/LifeBar.value = life
-	ConnectionManager.rpc('update_status', get_tree().get_network_unique_id(), life, mana)
+	ConnectionManager.rpc('update_status', get_tree().get_network_unique_id(), "life", life)
 
 func _on_RecoveryMana_timeout():
 	if not (mana + mana_recovery_rate > max_mana):
 		mana += int(mana_recovery_rate)
 	else:
 		mana = max_mana
+	
 	$CanvasLayer/Status/ManaBar.value = mana
-	$CanvasLayer/Status/Control/ManaBar.value = mana
-	ConnectionManager.rpc('update_status', get_tree().get_network_unique_id(), life, mana)
+	ConnectionManager.rpc('update_status', get_tree().get_network_unique_id(), "mana", mana)
 
 func _on_AttackInterval_timeout():
 	if target_gateway_id > 1:
 		if global_position.distance_to( GameManager.get_character(target_gateway_id).global_position ) <= attack_range:
 			ConnectionManager.rpc_id(target_gateway_id, 'attack_character', 10, 1)
 		$AttackInterval.start(1.5)
+
 

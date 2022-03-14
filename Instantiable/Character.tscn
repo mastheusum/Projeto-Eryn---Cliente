@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Scripts/Bases/Character.gd" type="Script" id=1]
 [ext_resource path="res://Resources/StateMachine/Animation.tres" type="AnimationNodeStateMachine" id=2]
@@ -8,11 +8,14 @@
 [ext_resource path="res://Sprites/UI/mp_bar 2.png" type="Texture" id=6]
 [ext_resource path="res://Resources/Fonts/IBM_Plex_Mono/DynamicFonts/Normal.tres" type="DynamicFont" id=7]
 [ext_resource path="res://Resources/Fonts/IBM_Plex_Mono/IBMPlexMono-Bold.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://Resources/Fonts/IBM_Plex_Mono/DynamicFonts/Bold.tres" type="DynamicFont" id=9]
 [ext_resource path="res://Instantiable/UI/Chat.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Resources/Fonts/IBM_Plex_Mono/DynamicFonts/BoldItalic.tres" type="DynamicFont" id=11]
+[ext_resource path="res://Resources/Fonts/IBM_Plex_Mono/DynamicFonts/Italic.tres" type="DynamicFont" id=12]
+[ext_resource path="res://Scripts/UI/AttributesControl.gd" type="Script" id=13]
+[ext_resource path="res://Instantiable/UI/Inventory.tscn" type="PackedScene" id=14]
 
-[sub_resource type="CapsuleShape2D" id=148]
-radius = 16.0
-height = 16.0
+[sub_resource type="CircleShape2D" id=150]
 
 [sub_resource type="Animation" id=108]
 resource_name = "IDLE Down"
@@ -38,7 +41,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 0 ]
+"values": [ 1 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("AnimatedSprite:playing")
@@ -77,7 +80,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 0 ]
+"values": [ 1 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("AnimatedSprite:playing")
@@ -128,7 +131,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 0 ]
+"values": [ 1 ]
 }
 
 [sub_resource type="Animation" id=113]
@@ -167,7 +170,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 0 ]
+"values": [ 1 ]
 }
 
 [sub_resource type="Animation" id=116]
@@ -334,34 +337,6 @@ tracks/1/keys = {
 [sub_resource type="StyleBoxFlat" id=131]
 bg_color = Color( 1, 0.556863, 0.556863, 1 )
 
-[sub_resource type="StyleBoxFlat" id=127]
-bg_color = Color( 0, 0.784314, 0, 1 )
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[sub_resource type="StyleBoxFlat" id=128]
-bg_color = Color( 0, 0.784314, 0, 0.196078 )
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[sub_resource type="StyleBoxFlat" id=129]
-bg_color = Color( 0, 0.588235, 0.784314, 1 )
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[sub_resource type="StyleBoxFlat" id=130]
-bg_color = Color( 0, 0.588235, 0.784314, 0.196078 )
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
 [sub_resource type="DynamicFont" id=149]
 size = 32
 font_data = ExtResource( 8 )
@@ -377,8 +352,8 @@ frames = ExtResource( 3 )
 animation = "Down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -16 )
-shape = SubResource( 148 )
+position = Vector2( 0, -10 )
+shape = SubResource( 150 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 "anims/IDLE Down" = SubResource( 108 )
@@ -420,80 +395,29 @@ __meta__ = {
 }
 
 [node name="Status" type="Control" parent="CanvasLayer"]
-margin_left = 412.0
-margin_top = 208.0
-margin_right = 612.0
-margin_bottom = 248.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 339.0
+margin_bottom = 112.0
 mouse_filter = 2
 __meta__ = {
+"_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="CharacterName" type="Label" parent="CanvasLayer/Status"]
-margin_top = -8.0
-margin_right = 200.0
-margin_bottom = 12.0
-rect_min_size = Vector2( 200, 20 )
-text = "Character Name"
-align = 1
-valign = 1
-autowrap = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LifeBar" type="ProgressBar" parent="CanvasLayer/Status"]
-margin_left = 50.0
-margin_top = 16.0
-margin_right = 150.0
-margin_bottom = 26.0
-rect_min_size = Vector2( 100, 10 )
-mouse_filter = 2
-custom_styles/fg = SubResource( 127 )
-custom_styles/bg = SubResource( 128 )
-value = 50.0
-percent_visible = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ManaBar" type="ProgressBar" parent="CanvasLayer/Status"]
-margin_left = 50.0
-margin_top = 33.0
-margin_right = 150.0
-margin_bottom = 43.0
-rect_min_size = Vector2( 100, 10 )
-mouse_filter = 2
-custom_styles/fg = SubResource( 129 )
-custom_styles/bg = SubResource( 130 )
-value = 50.0
-percent_visible = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Control" type="Control" parent="CanvasLayer/Status"]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Status" type="TextureRect" parent="CanvasLayer/Status/Control"]
-margin_left = -404.0
-margin_top = -200.0
-margin_right = -89.0
-margin_bottom = -110.0
+[node name="Status" type="TextureRect" parent="CanvasLayer/Status"]
+margin_right = 315.0
+margin_bottom = 90.0
 texture = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LifeBar" type="TextureProgress" parent="CanvasLayer/Status/Control"]
-margin_left = -323.0
-margin_top = -176.0
-margin_right = -147.0
-margin_bottom = -162.0
+[node name="LifeBar" type="TextureProgress" parent="CanvasLayer/Status"]
+margin_left = 81.0
+margin_top = 24.0
+margin_right = 257.0
+margin_bottom = 38.0
 value = 50.0
 texture_under = ExtResource( 4 )
 texture_progress = ExtResource( 4 )
@@ -503,11 +427,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ManaBar" type="TextureProgress" parent="CanvasLayer/Status/Control"]
-margin_left = -323.0
-margin_top = -162.0
-margin_right = -154.0
-margin_bottom = -155.0
+[node name="ManaBar" type="TextureProgress" parent="CanvasLayer/Status"]
+margin_left = 81.0
+margin_top = 38.0
+margin_right = 250.0
+margin_bottom = 45.0
 value = 50.0
 texture_under = ExtResource( 6 )
 texture_progress = ExtResource( 6 )
@@ -517,11 +441,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ExperienceBar" type="TextureProgress" parent="CanvasLayer/Status/Control"]
-margin_left = -324.0
-margin_top = -152.0
-margin_right = -155.0
-margin_bottom = -145.0
+[node name="ExperienceBar" type="TextureProgress" parent="CanvasLayer/Status"]
+margin_left = 80.0
+margin_top = 48.0
+margin_right = 249.0
+margin_bottom = 55.0
 value = 5.0
 texture_progress = ExtResource( 6 )
 tint_progress = Color( 1, 1, 0, 1 )
@@ -529,11 +453,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Status/Control"]
-margin_left = -413.0
-margin_top = -180.0
-margin_right = -311.0
-margin_bottom = -132.0
+[node name="Level" type="RichTextLabel" parent="CanvasLayer/Status"]
+margin_left = -9.0
+margin_top = 20.0
+margin_right = 93.0
+margin_bottom = 68.0
 custom_fonts/bold_font = SubResource( 149 )
 custom_fonts/normal_font = ExtResource( 7 )
 bbcode_enabled = true
@@ -543,9 +467,317 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="CharacterName" type="RichTextLabel" parent="CanvasLayer/Status"]
+margin_left = 81.0
+margin_top = -1.0
+margin_right = 281.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 200, 20 )
+custom_fonts/bold_italics_font = ExtResource( 11 )
+custom_fonts/italics_font = ExtResource( 12 )
+custom_fonts/bold_font = ExtResource( 9 )
+custom_fonts/normal_font = ExtResource( 7 )
+bbcode_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Attributes" type="Control" parent="CanvasLayer"]
+visible = false
+margin_left = 768.0
+margin_top = 128.0
+margin_right = 960.0
+margin_bottom = 416.0
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Attributes"]
+margin_right = 192.0
+margin_bottom = 288.0
+rect_min_size = Vector2( 192, 256 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AttributePoints" type="RichTextLabel" parent="CanvasLayer/Attributes"]
+margin_right = 192.0
+margin_bottom = 40.0
+bbcode_enabled = true
+bbcode_text = "
+[center]Points: 0"
+text = "
+Points: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Strength" type="Control" parent="CanvasLayer/Attributes"]
+margin_top = 36.0
+margin_right = 192.0
+margin_bottom = 56.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="CanvasLayer/Attributes/Strength"]
+margin_top = 4.0
+margin_right = 96.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 96, 0 )
+bbcode_enabled = true
+bbcode_text = "[center]Strength"
+text = "Strength"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="CanvasLayer/Attributes/Strength"]
+margin_left = 136.0
+margin_right = 156.0
+margin_bottom = 20.0
+focus_mode = 1
+enabled_focus_mode = 1
+text = "+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Constitution" type="Control" parent="CanvasLayer/Attributes"]
+margin_top = 68.0
+margin_right = 192.0
+margin_bottom = 88.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="CanvasLayer/Attributes/Constitution"]
+margin_top = 4.0
+margin_right = 96.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 96, 0 )
+bbcode_enabled = true
+bbcode_text = "[center]Constitution"
+text = "Constitution"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="CanvasLayer/Attributes/Constitution"]
+margin_left = 136.0
+margin_right = 156.0
+margin_bottom = 20.0
+focus_mode = 1
+enabled_focus_mode = 1
+text = "+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Dexterity" type="Control" parent="CanvasLayer/Attributes"]
+margin_top = 100.0
+margin_right = 192.0
+margin_bottom = 120.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="CanvasLayer/Attributes/Dexterity"]
+margin_top = 4.0
+margin_right = 96.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 96, 0 )
+bbcode_enabled = true
+bbcode_text = "[center]Dexterity"
+text = "Dexterity"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="CanvasLayer/Attributes/Dexterity"]
+margin_left = 136.0
+margin_right = 156.0
+margin_bottom = 20.0
+focus_mode = 1
+enabled_focus_mode = 1
+text = "+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Agility" type="Control" parent="CanvasLayer/Attributes"]
+margin_top = 132.0
+margin_right = 192.0
+margin_bottom = 152.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="CanvasLayer/Attributes/Agility"]
+margin_top = 4.0
+margin_right = 96.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 96, 0 )
+bbcode_enabled = true
+bbcode_text = "[center]Agility"
+text = "Agility"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="CanvasLayer/Attributes/Agility"]
+margin_left = 136.0
+margin_right = 156.0
+margin_bottom = 20.0
+focus_mode = 1
+enabled_focus_mode = 1
+text = "+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Intelligence" type="Control" parent="CanvasLayer/Attributes"]
+margin_top = 164.0
+margin_right = 192.0
+margin_bottom = 184.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="CanvasLayer/Attributes/Intelligence"]
+margin_top = 4.0
+margin_right = 96.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 96, 0 )
+bbcode_enabled = true
+bbcode_text = "[center]Intelligence"
+text = "Intelligence"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="CanvasLayer/Attributes/Intelligence"]
+margin_left = 136.0
+margin_right = 156.0
+margin_bottom = 20.0
+focus_mode = 1
+enabled_focus_mode = 1
+text = "+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Willpower" type="Control" parent="CanvasLayer/Attributes"]
+margin_top = 196.0
+margin_right = 192.0
+margin_bottom = 216.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="CanvasLayer/Attributes/Willpower"]
+margin_top = 4.0
+margin_right = 96.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 96, 0 )
+bbcode_enabled = true
+bbcode_text = "[center]Willpower"
+text = "Willpower"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="CanvasLayer/Attributes/Willpower"]
+margin_left = 136.0
+margin_right = 156.0
+margin_bottom = 20.0
+focus_mode = 1
+enabled_focus_mode = 1
+text = "+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Perception" type="Control" parent="CanvasLayer/Attributes"]
+margin_top = 228.0
+margin_right = 192.0
+margin_bottom = 248.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="CanvasLayer/Attributes/Perception"]
+margin_top = 4.0
+margin_right = 96.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 96, 0 )
+bbcode_enabled = true
+bbcode_text = "[center]Perception"
+text = "Perception"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="CanvasLayer/Attributes/Perception"]
+margin_left = 136.0
+margin_right = 156.0
+margin_bottom = 20.0
+focus_mode = 1
+enabled_focus_mode = 1
+text = "+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Wisdom" type="Control" parent="CanvasLayer/Attributes"]
+margin_top = 260.0
+margin_right = 192.0
+margin_bottom = 280.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="CanvasLayer/Attributes/Wisdom"]
+margin_top = 4.0
+margin_right = 96.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 96, 0 )
+bbcode_enabled = true
+bbcode_text = "[center]Wisdom"
+text = "Wisdom"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="CanvasLayer/Attributes/Wisdom"]
+margin_left = 136.0
+margin_right = 156.0
+margin_bottom = 20.0
+focus_mode = 1
+enabled_focus_mode = 1
+text = "+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Chat" parent="CanvasLayer" instance=ExtResource( 10 )]
 margin_top = 448.0
 margin_bottom = 0.0
+
+[node name="Inventory" parent="CanvasLayer" instance=ExtResource( 14 )]
+margin_left = 768.0
+margin_top = 69.0
+margin_right = -64.0
+margin_bottom = -107.0
 
 [node name="RecoveryLife" type="Timer" parent="."]
 
@@ -554,6 +786,14 @@ margin_bottom = 0.0
 [node name="AttackInterval" type="Timer" parent="."]
 one_shot = true
 
+[connection signal="pressed" from="CanvasLayer/Attributes/Strength/Button" to="CanvasLayer/Attributes" method="_on_Strength_pressed"]
+[connection signal="pressed" from="CanvasLayer/Attributes/Constitution/Button" to="CanvasLayer/Attributes" method="_on_Constitution_pressed"]
+[connection signal="pressed" from="CanvasLayer/Attributes/Dexterity/Button" to="CanvasLayer/Attributes" method="_on_Dexterity_pressed"]
+[connection signal="pressed" from="CanvasLayer/Attributes/Agility/Button" to="CanvasLayer/Attributes" method="_on_Agility_pressed"]
+[connection signal="pressed" from="CanvasLayer/Attributes/Intelligence/Button" to="CanvasLayer/Attributes" method="_on_Intelligence_pressed"]
+[connection signal="pressed" from="CanvasLayer/Attributes/Willpower/Button" to="CanvasLayer/Attributes" method="_on_Willpower_pressed"]
+[connection signal="pressed" from="CanvasLayer/Attributes/Perception/Button" to="CanvasLayer/Attributes" method="_on_Perception_pressed"]
+[connection signal="pressed" from="CanvasLayer/Attributes/Wisdom/Button" to="CanvasLayer/Attributes" method="_on_Wisdom_pressed"]
 [connection signal="timeout" from="RecoveryLife" to="." method="_on_RecoveryLife_timeout"]
 [connection signal="timeout" from="RecoveryMana" to="." method="_on_RecoveryMana_timeout"]
 [connection signal="timeout" from="AttackInterval" to="." method="_on_AttackInterval_timeout"]

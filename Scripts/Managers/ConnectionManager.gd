@@ -1,10 +1,6 @@
 extends Node2D
 
 var peer = null
-var character_name : String = ""
-const player_instance = preload("res://Instantiable/PlayerInstance.tscn")
-const client_script = preload("res://Scripts/CharacterClient.gd")
-const game_scene = preload("res://Scenes/Game.tscn")
 
 func _ready():
 	get_tree().connect("network_peer_connected", self, "_on_player_connected")
@@ -75,13 +71,9 @@ remote func response_sign_in(character_list : Dictionary):
 # This funcion will receive a list of geteways that will need destroy
 # if the in the list have your own gateway then this client are leaving the game
 remote func response_sign_out(character_list : Array):
-	print( get_tree().get_network_unique_id() )
-	print( character_list )
 	if character_list.has( get_tree().get_network_unique_id() ):
-		print(1)
 		SessionManager.exit_game()
 	else:
-		print(2)
 		for gateway in character_list:
 			GameManager.destroy_character( int(gateway) )
 
@@ -113,19 +105,25 @@ remote func attack_character(power : int, type : int):
 	ConnectionManager.rpc_id(1, 'set_aggressor_list', gateway_id)
 	GameManager.my_character.receive_damage(power, type)
 
-remote func set_aggressor_list(gateway_id : int):
+remote func set_aggressor_list(aggressor_id : int):
 	pass
 
-# ussed to update CharacterProxyes's life and mana 
-remote func update_status(gateway_id : int, life : int, mana : int):
-	if SessionManager.signed_in:
-		if gateway_id != get_tree().get_network_unique_id():
-			GameManager.get_character(gateway_id).update_status(life, mana)
+remote func update_status(gateway_id : int, status : String, value : int):
+	if gateway_id == get_tree().get_network_unique_id():
+		(GameManager.get_character(gateway_id) as Character).set_attribute(status, value)
+	else:
+		(GameManager.get_character(gateway_id) as CharacterProxy).set_attribute(status, value)
 
 remote func update_level(gateway_id : int, experience : int, level : int):
 	if SessionManager.signed_in:
 		if gateway_id == get_tree().get_network_unique_id():
-			GameManager.my_character.update_level(level)
-			GameManager.my_character.update_experience(experience)
+			GameManager.my_character.set_attribute("level", level)
+			GameManager.my_character.set_attribute("experience", experience)
 		else:
-			GameManager.get_character(gateway_id).update_level(level)
+			GameManager.get_character(gateway_id).set_attribute("level", level)
+
+remote func set_character_equipment(equipment : String, item : Dictionary):
+	pass
+
+remote func set_character_inventory(equipment_list : Array):
+	pass
