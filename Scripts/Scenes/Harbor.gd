@@ -7,7 +7,7 @@ var map_message_node = preload("res://Instantiable/UI/MapMessage.tscn")
 var map_alert_node = preload("res://Instantiable/UI/MessageAlert.tscn")
 
 func add_character_from_game(gateway_id : int, character : Dictionary):
-	print(character)
+#	print(character)
 	var player
 	if gateway_id == get_tree().get_network_unique_id():
 		player = character_node.instance()

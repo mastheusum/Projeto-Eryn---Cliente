@@ -10,9 +10,7 @@ func add_bag_item(item : Item, amount : int):
 func update_inventory():
 	player.set_inventory( $Bag.get_bag() )
 
-func _ready():
-	connect("updated_inventory", self, "_update_inventory")
-	
+func _ready():	
 	if player._weapon1:
 		$Equipments/Panel/Weapon1.add_child(player._weapon1)
 	if player._weapon2:

@@ -37,7 +37,7 @@ func drop_data(position, data):
 				inventory.add_bag_item( data['item'], data['amount'] )
 		else:
 			inventory.add_bag_item( data['item'], data['amount'] )
-		inventory.update_inventory()
+		inventory.call_deferred("update_inventory")
 
 func get_item_id():
 	var child = get_child(1)

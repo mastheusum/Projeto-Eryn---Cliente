@@ -63,6 +63,11 @@ _global_script_classes=[ {
 "class": "PlayableCharacter",
 "language": "GDScript",
 "path": "res://Scripts/Bases/PlayableCharacter.gd"
+}, {
+"base": "Panel",
+"class": "WeaponSlot",
+"language": "GDScript",
+"path": "res://Scripts/UI/Instantiable/WeaponSlot.gd"
 } ]
 _global_script_class_icons={
 "BagSlot": "",
@@ -75,7 +80,8 @@ _global_script_class_icons={
 "Inventory": "",
 "Item": "",
 "NoPlayableCharacter": "",
-"PlayableCharacter": ""
+"PlayableCharacter": "",
+"WeaponSlot": ""
 }
 
 [application]

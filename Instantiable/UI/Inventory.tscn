@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/UI/Instantiable/Inventory.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/UI/Instantiable/EquipmentSlot.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/UI/Instantiable/BagSlot.gd" type="Script" id=3]
 [ext_resource path="res://Scripts/UI/Instantiable/Bag.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/UI/Instantiable/WeaponSlot.gd" type="Script" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 
@@ -43,19 +44,24 @@ margin_left = 24.0
 margin_top = 56.0
 margin_right = 56.0
 margin_bottom = 88.0
-script = ExtResource( 2 )
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 accepted_item_type = 4
+slot2 = NodePath("../Weapon2")
 
 [node name="Weapon2" type="Panel" parent="Equipments/Panel"]
 margin_left = 120.0
 margin_top = 56.0
 margin_right = 152.0
 margin_bottom = 88.0
-script = ExtResource( 2 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 accepted_item_type = 4
+slot2 = NodePath("../Weapon1")
 
 [node name="Helmet" type="Panel" parent="Equipments/Panel"]
 margin_left = 72.0

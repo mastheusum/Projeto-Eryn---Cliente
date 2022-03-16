@@ -148,7 +148,7 @@ func set_attribute(attribute : String, value : int):
 
 func set_equipment(equipment_name : String, item : Item = null):
 	set(equipment_name, item)
-	ConnectionManager.rpc_id(1, "set_character_equipment", equipment_name, item.as_dict())
+	ConnectionManager.rpc_id(1, "set_character_equipment", equipment_name, item.as_dict() if item else {})
 
 func set_inventory(item_list : Array):
 	inventory = item_list
@@ -190,8 +190,22 @@ func _on_RecoveryMana_timeout():
 
 func _on_AttackInterval_timeout():
 	if target_gateway_id > 1:
-		if global_position.distance_to( GameManager.get_character(target_gateway_id).global_position ) <= attack_range:
-			ConnectionManager.rpc_id(target_gateway_id, 'attack_character', 10, 1)
+		var max_distance = 0
+		var power = strength
+		var critical = dexterity
+		if _weapon1:
+			power += _weapon1.attack
+			critical += _weapon1.critical
+			max_distance = _weapon1.attack_range
+		if _weapon2:
+			power += _weapon2.attack
+			critical += _weapon2.critical
+			if _weapon2.attack_range > max_distance:
+				max_distance = _weapon2.attack_range
+		randomize()
+		power *= 1.5 if randi() % 100 < critical else 1
+		if max_distance > 0 and global_position.distance_to( GameManager.get_character(target_gateway_id).global_position ) <= max_distance:
+			ConnectionManager.rpc_id(target_gateway_id, 'attack_character', power, 1)
 		$AttackInterval.start(1.5)
 
 
