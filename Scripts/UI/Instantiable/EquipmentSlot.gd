@@ -27,21 +27,14 @@ func drop_data(position, data):
 		var quantity = data['amount']
 		var sender = data['sender']
 		
-		if sender == 'bag':
-			var child = get_child(0)
-			if child:
-				remove_child(child)
-				inventory.add_bag_item(child, 1)
-			item.get_parent().modify_amount( -1 )
-			var new_item = Item.new()
-			new_item.dict_to(item.as_dict())
-			add_child( new_item )
-		else:
-			var child = get_child(0)
-			if child:
-				remove_child(child)
-				item.get_parent().add_child( child )
-			item.get_parent().remove_child( item )
-			add_child( item )
-		player.set('_'+self.name.to_lower(), item)
+		var equi_ref : Item = player['_'+self.name.to_lower()]
+		
+		if equi_ref.id > 0:
+			inventory.add_bag_item(Item.new().set_from_dict(equi_ref.as_dict()) , 1)
+			equi_ref.restart()
+		
+		player['_'+self.name.to_lower()].set_from_dict(item.as_dict())
+		(player['_'+self.name.to_lower()] as Item).texture = load( (player['_'+self.name.to_lower()] as Item).texture_path )
+		
 		inventory.call_deferred("update_inventory")
+		player.set_equipment('_'+self.name.to_lower())

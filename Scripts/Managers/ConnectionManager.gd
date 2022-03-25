@@ -93,10 +93,9 @@ remotesync func get_message(message : String):
 
 # This function is called when player receive a damage
 # then this damage is send to al another players connecteds
-remotesync func get_status_alert(message : String, type : int):
+remotesync func get_status_alert(sender_position : Vector2, message : String, type : int):
 	if SessionManager.signed_in:
-		var gateway_id = get_tree().get_rpc_sender_id()
-		GameManager.get_status_alert(gateway_id, message, type)
+		GameManager.get_status_alert(sender_position, message, type)
 
 # used by player to receive damage by other players
 remote func attack_character(power : int, type : int):
@@ -127,3 +126,23 @@ remote func set_character_equipment(equipment : String, item : Dictionary):
 
 remote func set_character_inventory(equipment_list : Array):
 	pass
+
+remote func create_monster(monster : Dictionary):
+	if SessionManager.signed_in:
+		GameManager.create_monster(monster)
+		print('>>>>>> create_monster')
+
+remote func update_monster(monster_id : String, attribute : String, value):
+	if SessionManager.signed_in:
+		(GameManager.get_monster(monster_id) as Monster).set_attribute(attribute, value)
+
+remote func destroy_monster(monster_id : String):
+	if SessionManager.signed_in:
+		GameManager.destroy_monster(monster_id)
+
+remote func attack_monster(monster_id : String, power : int, type : int):
+	pass
+
+remote func set_monster_position(monster_id : String, character_position : Vector2, character_direction : Vector2):
+	if SessionManager.signed_in:
+		GameManager.set_monster_position(monster_id, character_position, character_direction)

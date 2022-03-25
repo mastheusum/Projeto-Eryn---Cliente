@@ -10,15 +10,27 @@ enum Types {
 	WEAPON,
 	RING
 }
-var id : int = -1
-var item_name : String
-var texture_path : String
-var type : int
-var attack : int
-var attack_range : int
-var defense : int
-var critical : int
-var two_handed : int
+var id : int = 0
+var item_name : String = ''
+var texture_path : String = ''
+var type : int = Types.ARMOR
+var attack : int = 0
+var attack_range : int = 0
+var defense : int = 0
+var critical : int = 0
+var two_handed : int = 0
+
+func restart():
+	id = 0
+	item_name = ''
+	texture_path = ''
+	type = Types.ARMOR
+	attack = 0
+	attack_range = 0
+	defense = 0
+	critical = 0
+	two_handed = 0
+	texture = null
 
 func as_dict():
 	var dict = {}
@@ -35,12 +47,11 @@ func as_dict():
 	
 	return dict
 
-func dict_to(dict : Dictionary):
+func set_from_dict(dict : Dictionary):
 	if not dict.empty():
 		id = dict['id']
 		item_name = dict['item_name']
 		texture_path = dict['texture_path']
-		texture = load(texture_path)
 		type = dict['type']
 		attack = dict['attack']
 		attack_range = dict['attack_range']
@@ -48,6 +59,4 @@ func dict_to(dict : Dictionary):
 		critical = dict['critical']
 		two_handed = dict['two_handed']
 		
-		return self
-	else:
-		return null
+	return self

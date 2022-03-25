@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scripts/Bases/Character.gd" type="Script" id=1]
 [ext_resource path="res://Resources/StateMachine/Animation.tres" type="AnimationNodeStateMachine" id=2]
-[ext_resource path="res://Resources/Animations/0.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://Resources/Animations/Characters/0.tres" type="SpriteFrames" id=3]
 [ext_resource path="res://Sprites/UI/hp_bar 2.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/UI/hud_bg_without_custom_meter.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/UI/mp_bar 2.png" type="Texture" id=6]

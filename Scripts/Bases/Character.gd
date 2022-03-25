@@ -18,18 +18,19 @@ var full_recover_time : float = 750 # in secconds
 var life_recovery_rate : float = 0
 var mana_recovery_rate : float = 0
 
-var target_gateway_id : int = -1
+var player_target_id : int = -1
+var monster_target_id : String = ''
 
 var inventory = []
 
-var _helmet : Item = null
-var _armor : Item = null
-var _legs : Item = null
-var _boots : Item = null
-var _weapon1 : Item = null
-var _weapon2 : Item = null
-var _ring1 : Item = null
-var _ring2 : Item = null
+var _helmet : Item = Item.new()
+var _armor : Item = Item.new()
+var _legs : Item = Item.new()
+var _boots : Item = Item.new()
+var _weapon1 : Item = Item.new()
+var _weapon2 : Item = Item.new()
+var _ring1 : Item = Item.new()
+var _ring2 : Item = Item.new()
 
 signal update_attribute()
 
@@ -45,7 +46,7 @@ func _ready():
 	call_deferred( "set_attribute", "level", level )
 	call_deferred( "set_attribute", "experience", experience )
 	
-	$AnimatedSprite.frames = load("res://Resources/Animations/"+str(sprite_index)+".tres")
+	$AnimatedSprite.frames = load("res://Resources/Animations/Characters/"+str(sprite_index)+".tres")
 	def_life_recovery()
 	def_mana_recovery()
 
@@ -85,6 +86,8 @@ func _unhandled_input(event):
 		# Attribute Controle
 		if event.is_pressed() and event.scancode == KEY_C:
 			$CanvasLayer/Attributes.visible = not $CanvasLayer/Attributes.visible
+		if event.is_pressed() and event.scancode == KEY_V:
+			$CanvasLayer/Inventory.visible = not $CanvasLayer/Inventory.visible
 		# Movement
 		if event.is_action("ui_right") or event.is_action("ui_left"):
 			_direction.x = event.get_action_strength("ui_right") - event.get_action_strength("ui_left")
@@ -146,16 +149,15 @@ func set_attribute(attribute : String, value : int):
 			$CanvasLayer/Status/ManaBar.max_value = max_mana
 		emit_signal("update_attribute")
 
-func set_equipment(equipment_name : String, item : Item = null):
-	set(equipment_name, item)
-	ConnectionManager.rpc_id(1, "set_character_equipment", equipment_name, item.as_dict() if item else {})
+func set_equipment(equipment_name : String):
+	ConnectionManager.rpc_id(1, "set_character_equipment", equipment_name, self[equipment_name].as_dict() if self[equipment_name].id > 0 else {})
+#	print('> ',equipment_name)
 
 func set_inventory(item_list : Array):
 	inventory = item_list
 	ConnectionManager.rpc_id(1, "set_character_inventory", inventory)
 
-func start_attack(gateway_id : int):
-	target_gateway_id = gateway_id
+func start_attack():
 	if not $AttackInterval.time_left > 0:
 		$AttackInterval.emit_signal("timeout")
 
@@ -168,7 +170,7 @@ func receive_damage(value : int, type : int):
 	
 	$CanvasLayer/Status/LifeBar.value = life
 	ConnectionManager.rpc('update_status', get_tree().get_network_unique_id(), "life", life)
-	ConnectionManager.rpc('get_status_alert', str(damage), 1)
+	ConnectionManager.rpc('get_status_alert', global_position, str(damage), 1)
 
 func _on_RecoveryLife_timeout():
 	if not (life + life_recovery_rate > max_life):
@@ -189,23 +191,26 @@ func _on_RecoveryMana_timeout():
 	ConnectionManager.rpc('update_status', get_tree().get_network_unique_id(), "mana", mana)
 
 func _on_AttackInterval_timeout():
-	if target_gateway_id > 1:
-		var max_distance = 0
-		var power = strength
-		var critical = dexterity
-		if _weapon1:
-			power += _weapon1.attack
-			critical += _weapon1.critical
-			max_distance = _weapon1.attack_range
-		if _weapon2:
-			power += _weapon2.attack
-			critical += _weapon2.critical
-			if _weapon2.attack_range > max_distance:
-				max_distance = _weapon2.attack_range
-		randomize()
-		power *= 1.5 if randi() % 100 < critical else 1
-		if max_distance > 0 and global_position.distance_to( GameManager.get_character(target_gateway_id).global_position ) <= max_distance:
-			ConnectionManager.rpc_id(target_gateway_id, 'attack_character', power, 1)
-		$AttackInterval.start(1.5)
+	var max_distance = 0
+	var power = strength
+	var critical = dexterity
+	if _weapon1.id > 0:
+		power += _weapon1.attack
+		critical += _weapon1.critical
+		max_distance = _weapon1.attack_range
+	if _weapon2.id > 0:
+		power += _weapon2.attack
+		critical += _weapon2.critical
+		if _weapon2.attack_range > max_distance:
+			max_distance = _weapon2.attack_range
+	randomize()
+	power *= 1.5 if randi() % 100 < critical else 1
+	if monster_target_id == '' and player_target_id != -1:
+		if max_distance > 0 and global_position.distance_to( GameManager.get_character(player_target_id).global_position ) <= max_distance:
+			ConnectionManager.rpc_id(player_target_id, 'attack_character', power, 1)
+	elif monster_target_id != '' and player_target_id == -1:
+		if max_distance > 0 and global_position.distance_to( GameManager.get_monster(monster_target_id).global_position ) <= max_distance:
+			ConnectionManager.rpc_id(1, 'attack_monster', monster_target_id, power, 1)
+	$AttackInterval.start(1.5)
 
 

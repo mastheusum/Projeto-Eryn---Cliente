@@ -25,3 +25,9 @@ func attack(target_id : int, max_range : float, power : int):
 
 func _on_dead():
 	pass
+
+func set_max_life():
+	self.max_life = 50 + 5 * constitution
+
+func set_max_mana():
+	self.max_mana = 15 + 5 * intelligence

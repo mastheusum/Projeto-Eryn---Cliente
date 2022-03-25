@@ -20,6 +20,7 @@ func add_item(item : Item, amount : int):
 			item.get_parent().remove_child(item)
 		$ScrollContainer/GridContainer.get_child(index).add_child(item)
 		$ScrollContainer/GridContainer.get_child(index).set_amount(amount)
+		item.texture = load( item.texture_path )
 
 func get_bag():
 	var inventory = []
