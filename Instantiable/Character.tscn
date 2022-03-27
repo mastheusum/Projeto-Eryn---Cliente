@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Scripts/Bases/Character.gd" type="Script" id=1]
 [ext_resource path="res://Resources/StateMachine/Animation.tres" type="AnimationNodeStateMachine" id=2]
@@ -12,8 +12,9 @@
 [ext_resource path="res://Instantiable/UI/Chat.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Resources/Fonts/IBM_Plex_Mono/DynamicFonts/BoldItalic.tres" type="DynamicFont" id=11]
 [ext_resource path="res://Resources/Fonts/IBM_Plex_Mono/DynamicFonts/Italic.tres" type="DynamicFont" id=12]
-[ext_resource path="res://Scripts/UI/AttributesControl.gd" type="Script" id=13]
+[ext_resource path="res://Instantiable/UI/Attributes.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Instantiable/UI/Inventory.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Sprites/UI/Scroll.png" type="Texture" id=15]
 
 [sub_resource type="CircleShape2D" id=150]
 
@@ -482,292 +483,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Attributes" type="Control" parent="CanvasLayer"]
+[node name="Attributes" parent="CanvasLayer" instance=ExtResource( 13 )]
 visible = false
-margin_left = 768.0
-margin_top = 128.0
-margin_right = 960.0
-margin_bottom = 416.0
-script = ExtResource( 13 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Panel" type="Panel" parent="CanvasLayer/Attributes"]
-margin_right = 192.0
-margin_bottom = 288.0
-rect_min_size = Vector2( 192, 256 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="AttributePoints" type="RichTextLabel" parent="CanvasLayer/Attributes"]
-margin_right = 192.0
-margin_bottom = 40.0
-bbcode_enabled = true
-bbcode_text = "
-[center]Points: 0"
-text = "
-Points: 0"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Strength" type="Control" parent="CanvasLayer/Attributes"]
-margin_top = 36.0
-margin_right = 192.0
-margin_bottom = 56.0
-__meta__ = {
-"_edit_group_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Text" type="RichTextLabel" parent="CanvasLayer/Attributes/Strength"]
-margin_top = 4.0
-margin_right = 96.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 96, 0 )
-bbcode_enabled = true
-bbcode_text = "[center]Strength"
-text = "Strength"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Button" type="Button" parent="CanvasLayer/Attributes/Strength"]
-margin_left = 136.0
-margin_right = 156.0
-margin_bottom = 20.0
-focus_mode = 1
-enabled_focus_mode = 1
-text = "+"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Constitution" type="Control" parent="CanvasLayer/Attributes"]
-margin_top = 68.0
-margin_right = 192.0
-margin_bottom = 88.0
-__meta__ = {
-"_edit_group_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Text" type="RichTextLabel" parent="CanvasLayer/Attributes/Constitution"]
-margin_top = 4.0
-margin_right = 96.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 96, 0 )
-bbcode_enabled = true
-bbcode_text = "[center]Constitution"
-text = "Constitution"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Button" type="Button" parent="CanvasLayer/Attributes/Constitution"]
-margin_left = 136.0
-margin_right = 156.0
-margin_bottom = 20.0
-focus_mode = 1
-enabled_focus_mode = 1
-text = "+"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Dexterity" type="Control" parent="CanvasLayer/Attributes"]
-margin_top = 100.0
-margin_right = 192.0
-margin_bottom = 120.0
-__meta__ = {
-"_edit_group_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Text" type="RichTextLabel" parent="CanvasLayer/Attributes/Dexterity"]
-margin_top = 4.0
-margin_right = 96.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 96, 0 )
-bbcode_enabled = true
-bbcode_text = "[center]Dexterity"
-text = "Dexterity"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Button" type="Button" parent="CanvasLayer/Attributes/Dexterity"]
-margin_left = 136.0
-margin_right = 156.0
-margin_bottom = 20.0
-focus_mode = 1
-enabled_focus_mode = 1
-text = "+"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Agility" type="Control" parent="CanvasLayer/Attributes"]
-margin_top = 132.0
-margin_right = 192.0
-margin_bottom = 152.0
-__meta__ = {
-"_edit_group_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Text" type="RichTextLabel" parent="CanvasLayer/Attributes/Agility"]
-margin_top = 4.0
-margin_right = 96.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 96, 0 )
-bbcode_enabled = true
-bbcode_text = "[center]Agility"
-text = "Agility"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Button" type="Button" parent="CanvasLayer/Attributes/Agility"]
-margin_left = 136.0
-margin_right = 156.0
-margin_bottom = 20.0
-focus_mode = 1
-enabled_focus_mode = 1
-text = "+"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Intelligence" type="Control" parent="CanvasLayer/Attributes"]
-margin_top = 164.0
-margin_right = 192.0
-margin_bottom = 184.0
-__meta__ = {
-"_edit_group_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Text" type="RichTextLabel" parent="CanvasLayer/Attributes/Intelligence"]
-margin_top = 4.0
-margin_right = 96.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 96, 0 )
-bbcode_enabled = true
-bbcode_text = "[center]Intelligence"
-text = "Intelligence"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Button" type="Button" parent="CanvasLayer/Attributes/Intelligence"]
-margin_left = 136.0
-margin_right = 156.0
-margin_bottom = 20.0
-focus_mode = 1
-enabled_focus_mode = 1
-text = "+"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Willpower" type="Control" parent="CanvasLayer/Attributes"]
-margin_top = 196.0
-margin_right = 192.0
-margin_bottom = 216.0
-__meta__ = {
-"_edit_group_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Text" type="RichTextLabel" parent="CanvasLayer/Attributes/Willpower"]
-margin_top = 4.0
-margin_right = 96.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 96, 0 )
-bbcode_enabled = true
-bbcode_text = "[center]Willpower"
-text = "Willpower"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Button" type="Button" parent="CanvasLayer/Attributes/Willpower"]
-margin_left = 136.0
-margin_right = 156.0
-margin_bottom = 20.0
-focus_mode = 1
-enabled_focus_mode = 1
-text = "+"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Perception" type="Control" parent="CanvasLayer/Attributes"]
-margin_top = 228.0
-margin_right = 192.0
-margin_bottom = 248.0
-__meta__ = {
-"_edit_group_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Text" type="RichTextLabel" parent="CanvasLayer/Attributes/Perception"]
-margin_top = 4.0
-margin_right = 96.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 96, 0 )
-bbcode_enabled = true
-bbcode_text = "[center]Perception"
-text = "Perception"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Button" type="Button" parent="CanvasLayer/Attributes/Perception"]
-margin_left = 136.0
-margin_right = 156.0
-margin_bottom = 20.0
-focus_mode = 1
-enabled_focus_mode = 1
-text = "+"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Wisdom" type="Control" parent="CanvasLayer/Attributes"]
-margin_top = 260.0
-margin_right = 192.0
-margin_bottom = 280.0
-__meta__ = {
-"_edit_group_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="Text" type="RichTextLabel" parent="CanvasLayer/Attributes/Wisdom"]
-margin_top = 4.0
-margin_right = 96.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 96, 0 )
-bbcode_enabled = true
-bbcode_text = "[center]Wisdom"
-text = "Wisdom"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Button" type="Button" parent="CanvasLayer/Attributes/Wisdom"]
-margin_left = 136.0
-margin_right = 156.0
-margin_bottom = 20.0
-focus_mode = 1
-enabled_focus_mode = 1
-text = "+"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_left = 808.0
+margin_right = 1000.0
 
 [node name="Chat" parent="CanvasLayer" instance=ExtResource( 10 )]
 margin_top = 448.0
@@ -779,6 +498,44 @@ margin_top = 69.0
 margin_right = -64.0
 margin_bottom = -107.0
 
+[node name="Loot" type="Control" parent="CanvasLayer"]
+visible = false
+margin_left = 424.0
+margin_top = 77.0
+margin_right = 600.0
+margin_bottom = 125.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/Loot"]
+margin_right = 176.0
+margin_bottom = 48.0
+texture = ExtResource( 15 )
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Loot"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 168.0
+margin_bottom = 43.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/Loot/ScrollContainer"]
+columns = 4
+
 [node name="RecoveryLife" type="Timer" parent="."]
 
 [node name="RecoveryMana" type="Timer" parent="."]
@@ -786,14 +543,6 @@ margin_bottom = -107.0
 [node name="AttackInterval" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="pressed" from="CanvasLayer/Attributes/Strength/Button" to="CanvasLayer/Attributes" method="_on_Strength_pressed"]
-[connection signal="pressed" from="CanvasLayer/Attributes/Constitution/Button" to="CanvasLayer/Attributes" method="_on_Constitution_pressed"]
-[connection signal="pressed" from="CanvasLayer/Attributes/Dexterity/Button" to="CanvasLayer/Attributes" method="_on_Dexterity_pressed"]
-[connection signal="pressed" from="CanvasLayer/Attributes/Agility/Button" to="CanvasLayer/Attributes" method="_on_Agility_pressed"]
-[connection signal="pressed" from="CanvasLayer/Attributes/Intelligence/Button" to="CanvasLayer/Attributes" method="_on_Intelligence_pressed"]
-[connection signal="pressed" from="CanvasLayer/Attributes/Willpower/Button" to="CanvasLayer/Attributes" method="_on_Willpower_pressed"]
-[connection signal="pressed" from="CanvasLayer/Attributes/Perception/Button" to="CanvasLayer/Attributes" method="_on_Perception_pressed"]
-[connection signal="pressed" from="CanvasLayer/Attributes/Wisdom/Button" to="CanvasLayer/Attributes" method="_on_Wisdom_pressed"]
 [connection signal="timeout" from="RecoveryLife" to="." method="_on_RecoveryLife_timeout"]
 [connection signal="timeout" from="RecoveryMana" to="." method="_on_RecoveryMana_timeout"]
 [connection signal="timeout" from="AttackInterval" to="." method="_on_AttackInterval_timeout"]

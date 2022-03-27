@@ -213,4 +213,3 @@ func _on_AttackInterval_timeout():
 			ConnectionManager.rpc_id(1, 'attack_monster', monster_target_id, power, 1)
 	$AttackInterval.start(1.5)
 
-

@@ -1,0 +1,450 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/UI/AttributesControl.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/UI/Scroll.png" type="Texture" id=2]
+
+[node name="Attributes" type="Control"]
+margin_left = 768.0
+margin_top = 128.0
+margin_right = 960.0
+margin_bottom = 416.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+margin_left = -8.0
+margin_right = 192.0
+margin_bottom = 288.0
+texture = ExtResource( 2 )
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="."]
+margin_left = -216.0
+margin_right = -16.0
+margin_bottom = 288.0
+texture = ExtResource( 2 )
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AttributePoints" type="RichTextLabel" parent="."]
+margin_right = 192.0
+margin_bottom = 40.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "
+[center]Points: 0"
+text = "
+Points: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Strength" type="Control" parent="."]
+margin_top = 36.0
+margin_right = 192.0
+margin_bottom = 56.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="Strength"]
+margin_top = 4.0
+margin_right = 96.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 96, 0 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Strength"
+text = "Strength"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="Strength"]
+margin_left = 136.0
+margin_right = 156.0
+margin_bottom = 20.0
+focus_mode = 1
+enabled_focus_mode = 1
+text = "+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Constitution" type="Control" parent="."]
+margin_top = 68.0
+margin_right = 192.0
+margin_bottom = 88.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="Constitution"]
+margin_top = 4.0
+margin_right = 96.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 96, 0 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Constitution"
+text = "Constitution"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="Constitution"]
+margin_left = 136.0
+margin_right = 156.0
+margin_bottom = 20.0
+focus_mode = 1
+enabled_focus_mode = 1
+text = "+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Dexterity" type="Control" parent="."]
+margin_top = 100.0
+margin_right = 192.0
+margin_bottom = 120.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="Dexterity"]
+margin_top = 4.0
+margin_right = 96.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 96, 0 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Dexterity"
+text = "Dexterity"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="Dexterity"]
+margin_left = 136.0
+margin_right = 156.0
+margin_bottom = 20.0
+focus_mode = 1
+enabled_focus_mode = 1
+text = "+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Agility" type="Control" parent="."]
+margin_top = 132.0
+margin_right = 192.0
+margin_bottom = 152.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="Agility"]
+margin_top = 4.0
+margin_right = 96.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 96, 0 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Agility"
+text = "Agility"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="Agility"]
+margin_left = 136.0
+margin_right = 156.0
+margin_bottom = 20.0
+focus_mode = 1
+enabled_focus_mode = 1
+text = "+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Intelligence" type="Control" parent="."]
+margin_top = 164.0
+margin_right = 192.0
+margin_bottom = 184.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="Intelligence"]
+margin_top = 4.0
+margin_right = 96.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 96, 0 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Intelligence"
+text = "Intelligence"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="Intelligence"]
+margin_left = 136.0
+margin_right = 156.0
+margin_bottom = 20.0
+focus_mode = 1
+enabled_focus_mode = 1
+text = "+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Willpower" type="Control" parent="."]
+margin_top = 196.0
+margin_right = 192.0
+margin_bottom = 216.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="Willpower"]
+margin_top = 4.0
+margin_right = 96.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 96, 0 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Willpower"
+text = "Willpower"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="Willpower"]
+margin_left = 136.0
+margin_right = 156.0
+margin_bottom = 20.0
+focus_mode = 1
+enabled_focus_mode = 1
+text = "+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Perception" type="Control" parent="."]
+margin_top = 228.0
+margin_right = 192.0
+margin_bottom = 248.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="Perception"]
+margin_top = 4.0
+margin_right = 96.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 96, 0 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Perception"
+text = "Perception"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="Perception"]
+margin_left = 136.0
+margin_right = 156.0
+margin_bottom = 20.0
+focus_mode = 1
+enabled_focus_mode = 1
+text = "+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Wisdom" type="Control" parent="."]
+margin_top = 260.0
+margin_right = 192.0
+margin_bottom = 280.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="Wisdom"]
+margin_top = 4.0
+margin_right = 96.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 96, 0 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Wisdom"
+text = "Wisdom"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="Wisdom"]
+margin_left = 136.0
+margin_right = 156.0
+margin_bottom = 20.0
+focus_mode = 1
+enabled_focus_mode = 1
+text = "+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="INFO" type="Control" parent="."]
+margin_left = -208.0
+margin_top = 8.0
+margin_right = -24.0
+margin_bottom = 280.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Life" type="RichTextLabel" parent="INFO"]
+margin_right = 184.0
+margin_bottom = 40.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "
+Max Life: 150(100)"
+text = "
+Max Life: 150(100)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mana" type="RichTextLabel" parent="INFO"]
+margin_top = 32.0
+margin_right = 184.0
+margin_bottom = 72.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "
+Max Mana: 150(100)"
+text = "
+Max Mana: 150(100)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Attack" type="RichTextLabel" parent="INFO"]
+margin_top = 60.0
+margin_right = 184.0
+margin_bottom = 100.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "
+Attack: 100"
+text = "
+Attack: 100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Defense" type="RichTextLabel" parent="INFO"]
+margin_top = 88.0
+margin_right = 184.0
+margin_bottom = 128.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "
+Defense: 100"
+text = "
+Defense: 100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Magic Attack" type="RichTextLabel" parent="INFO"]
+margin_top = 120.0
+margin_right = 184.0
+margin_bottom = 160.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "
+Magic Attack: 100"
+text = "
+Magic Attack: 100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Magic Defense" type="RichTextLabel" parent="INFO"]
+margin_top = 152.0
+margin_right = 184.0
+margin_bottom = 192.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "
+Magic Defense: 100"
+text = "
+Magic Defense: 100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Critical Rate" type="RichTextLabel" parent="INFO"]
+margin_top = 184.0
+margin_right = 184.0
+margin_bottom = 224.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "
+Magic Defense: 100"
+text = "
+Magic Defense: 100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Critical Rate2" type="RichTextLabel" parent="INFO"]
+margin_top = 216.0
+margin_right = 184.0
+margin_bottom = 256.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "
+Magic Defense: 100"
+text = "
+Magic Defense: 100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Strength/Button" to="." method="_on_Strength_pressed"]
+[connection signal="pressed" from="Constitution/Button" to="." method="_on_Constitution_pressed"]
+[connection signal="pressed" from="Dexterity/Button" to="." method="_on_Dexterity_pressed"]
+[connection signal="pressed" from="Agility/Button" to="." method="_on_Agility_pressed"]
+[connection signal="pressed" from="Intelligence/Button" to="." method="_on_Intelligence_pressed"]
+[connection signal="pressed" from="Willpower/Button" to="." method="_on_Willpower_pressed"]
+[connection signal="pressed" from="Perception/Button" to="." method="_on_Perception_pressed"]
+[connection signal="pressed" from="Wisdom/Button" to="." method="_on_Wisdom_pressed"]
